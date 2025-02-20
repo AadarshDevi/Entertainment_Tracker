@@ -32,5 +32,5 @@
 
 ## Data Tokenizer
 
-<##> : section seperator
-<<>> : status/tag seperator
+- <##> : section seperator
+- <<>> : status/tag seperator
