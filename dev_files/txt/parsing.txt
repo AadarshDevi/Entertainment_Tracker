@@ -1,22 +1,26 @@
 Data file filepath: D:/Programming/Java/Projects/Entertainment_Tracker/Group_3/data.txt
 
-type<##>franchise<##>title<##>status<##>tags<##>season num<##>episode num<##>release date<##>runtime
-
-Tokens:
-<##> : section seperator
-<<>> : status/tag seperator
-
-Status:
-1: completed
-2: released
-3: upcoming
-
-Other status:
-4: special
-5: pilot
-
 < --------------------------------------------- Anime Parsing -------------------------------------------- >
 
+Before Parsing:
+type<##>franchise<##>title<##>status<##>tags<##>season num<##>episode num<##>release date<##>runtime
+
+After Parsing:
+{
+    type,
+    franchise,
+    title,
+    status: [
+
+    ],
+    tags: [
+
+    ],
+    season,
+    episode,
+    date,
+    duration
+}
 
 // season 6 ep 1 of miraculous ladybug
 
@@ -74,11 +78,31 @@ After Parsing:
 
 < --------------------------------------------- Movie Parsing -------------------------------------------- >
 
+Before Parsing:
+type<##>franchise<##>title<##>status<##>tags<##>runtime<##>release date<##>animation_companies
+
+After Parsing:
+{
+    type,
+    franchise,
+    title,
+    status: [
+
+    ],
+    tags: [
+
+    ],
+    animation_companies: [
+        
+    ]
+    date,
+    duration
+}
 
 // Miraculous: Tales of Ladybug and Cat Noir, The Movie
 
 Before Parsing:
-Movie<##>Miraculous<##>Tales of Ladybug and Cat Noir, The Movie<##>1<##>miraculous movie<<>>miraculous ladybug movie<##>105<##>2023-07-28
+Movie<##>Miraculous<##>Tales of Ladybug and Cat Noir, The Movie<##>1<##>miraculous movie<<>>miraculous ladybug movie<##>105<##>2023-07-28<##>Zagtoon<<>>Fantawild Animation
 
 After Parsing:
 {
@@ -97,5 +121,9 @@ After Parsing:
         miraculous ladybug movie
     ],
     date: 2023-07-28,
-    duration: 105
+    duration: 105,
+    animation_companies: [
+        Zagtoon,
+        Fantawild Animation,
+    ]
 }

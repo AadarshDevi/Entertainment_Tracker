@@ -1,32 +1,30 @@
 package main.java.backend.entertainment;
 
+import java.time.LocalDate;
+
 public class Movie extends Entertainment {
 
-    private int runtime;
-    private String date;
+    private int duration;
+    private String[] animation_companies;
 
     public Movie(String type, String franchise, String title, String[] statuses, String[] tags,
-            int runtime, String date) {
-        super(type, franchise, title, statuses, tags);
+            int duration, LocalDate date, String[] animation_companies) {
+        super(type, franchise, title, statuses, tags, date);
 
-        this.runtime = runtime;
-        this.date = date;
+        this.duration = duration;
+        this.animation_companies = animation_companies;
     }
 
-    public String getDate() {
-        return date;
+    public int getDuration() {
+        return duration;
     }
 
-    public int getRuntime() {
-        return runtime;
+    public String[] getAnimationCompanies() {
+        return animation_companies;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setRuntime(int runtime) {
-        this.runtime = runtime;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
 }

@@ -1,0 +1,57 @@
+Client
+    > API()
+    > MainFrame
+        - create using fxml
+        - get MainFrameController add add it to object
+
+API
+    > createBackend()
+        > backend : Backend
+        > engine : SearchEngine (IncrementalSearch)
+
+    > setBackend()
+        > backend.start()
+            > parsedData = readData() : ArrayList
+                > create array list from reading data from .txt
+
+            > setEntertainments(parsedData)
+                > for each string array
+                    > createEntertainment() : Entertainment
+                    > entertainmentList.add()
+                        > add entertainment
+
+        > engine.setOriginalList()
+            > give raw data from backend
+
+    > {
+        connectMainFrameController(),
+        MainFrameController.connectAPI()
+        }
+        > connect MainFrameController to API and vice versa
+
+    > setFrontEnd()
+        > get entertainment list from backend
+        > setModules() - give entertainment list
+            > module = createModule()
+            > add module to module list
+            > duplicateModule = createModule()
+            > add duplicate to searcharraylist
+            > add searcharraylist to search list
+
+
+MainFrame
+   - creates modules and their controllers
+   - set module information (aka entertainment)
+
+Populating Modules
+    - modules in arraylist will be put in their respective tabs
+    - duplicate modules will be put in search tab
+
+MainFrame
+    - create fxmls
+        - movie viewer
+        - anime viewer
+        - entertainment editor
+
+    - create controllers
+        - get controller from fxml

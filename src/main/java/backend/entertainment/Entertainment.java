@@ -1,5 +1,7 @@
 package main.java.backend.entertainment;
 
+import java.time.LocalDate;
+
 public class Entertainment {
     public static final String MOVIE = "Movie";
     public static final String ANIME = "Anime";
@@ -9,13 +11,28 @@ public class Entertainment {
     private String title;
     private String[] statuses;
     private String[] tags;
+    private LocalDate date;
 
-    public Entertainment(String type, String franchise, String title, String[] statuses, String[] tags) {
+    private int primaryStatus;
+    private int secondaryStatus;
+
+    public Entertainment(String type, String franchise, String title, String[] statuses, String[] tags,
+            LocalDate date) {
         this.type = type;
         this.franchise = franchise;
         this.title = title;
         this.statuses = statuses;
         this.tags = tags;
+        this.date = date;
+
+        setStatus();
+    }
+
+    private void setStatus() {
+        primaryStatus = Integer.parseInt(getStatuses()[0]);
+
+        // if statement
+        secondaryStatus = (getStatuses().length > 1) ? Integer.parseInt(getStatuses()[1]) : 0;
     }
 
     public String getFranchise() {
@@ -38,6 +55,18 @@ public class Entertainment {
         return type;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public int getPrimaryStatus() {
+        return primaryStatus;
+    }
+
+    public int getSecondaryStatus() {
+        return secondaryStatus;
+    }
+
     public void setFranchise(String franchise) {
         this.franchise = franchise;
     }
@@ -56,6 +85,18 @@ public class Entertainment {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setPrimaryStatus(int primaryStatus) {
+        this.primaryStatus = primaryStatus;
+    }
+
+    public void setSecondaryStatus(int secondaryStatus) {
+        this.secondaryStatus = secondaryStatus;
     }
 
 }

@@ -1,13 +1,19 @@
 package main.java.frontend.controllers;
 
+import java.time.LocalDate;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import main.java.api.API;
+import main.java.api.Logger.ConsoleLog;
+import main.java.api.Logger.ConsoleLogFactory;
 import main.java.backend.entertainment.Anime;
 import main.java.backend.entertainment.Entertainment;
 import main.java.backend.entertainment.Movie;
 
 public class ModuleController {
+
+    private final ConsoleLog logger = ConsoleLogFactory.getLogger();
 
     private Entertainment entertainment;
     private int id;
@@ -26,53 +32,92 @@ public class ModuleController {
     @FXML
     private Label module_info_right;
 
-    public void initialize() {
-        // module_id = new Label();
-        // module_name = new Label();
-        // module_info_left = new Label();
-        // module_info_right = new Label();
-    }
-
-    public void setData(int id, Entertainment entertainment) {
+    public void setEntertainment(Entertainment entertainment) {
         this.entertainment = entertainment;
-        // this.id = id;
-        viewData();
+        viewEntertainment();
     }
 
-    public void viewData() {
-        // module_id.setText(id + ".");
-        module_name.setText(entertainment.getFranchise() + ": " + entertainment.getTitle());
-        // api.getLogger().debug(this, entertainment.getFranchise());
+    private void viewEntertainment() {
+
+        // set module name
+        if (entertainment.getTitle().equals("NVR")) {
+            module_name.setText(entertainment.getFranchise());
+        } else if (entertainment.getFranchise().contains("**")) {
+            module_name.setText(entertainment.getFranchise().replace("**", "") +
+                    " " + entertainment.getTitle());
+        } else {
+            module_name.setText(entertainment.getFranchise() + ": " +
+                    entertainment.getTitle());
+        }
+
+        LocalDate unknownDate = LocalDate.of(3000, 01, 01);
+        LocalDate completedDate = LocalDate.of(3000, 01, 02);
+
+        if (entertainment.getDate().isEqual(unknownDate)) {
+            module_info_right.setText("Unknown");
+        } else if (entertainment.getDate().isEqual(completedDate)) {
+            module_info_right.setText("Completed");
+        } else {
+            module_info_right.setText(api.convert_LocalDate_to_string_date(entertainment.getDate()));
+        }
+
         switch (entertainment.getType()) {
             case Entertainment.MOVIE:
+
+                // convert entertainment to movie
                 Movie movie = (Movie) entertainment;
-                module_info_left.setText(movie.getDate());
-                module_info_right.setText(Integer.toString(movie.getRuntime()));
-                // api.getLogger().debug(this, module_info_left.getText());
+
+                // set viewing duration
+                String left_info = (movie.getDuration() == 0) ? "Unknown" : (movie.getDuration() + " min");
+                module_info_left.setText(left_info);
                 break;
+
             case Entertainment.ANIME:
+
+                // convert entertainment to anime
                 Anime anime = (Anime) entertainment;
-                module_info_left.setText("S" + anime.getSeason());
-                module_info_right.setText("E" + anime.getEpisode());
-                // api.getLogger().debug(this, module_info_left.getText());
+
+                // checking of the series is over
+                left_info = (anime.getEpisode() == 947) ? "No Info"
+                        : "S" + anime.getSeason() + " E" + anime.getEpisode();
+                module_info_left.setText(left_info);
                 break;
+
             default:
-                api.getLogger().error(this, " --> Temp Text <--");
-
+                break;
         }
-        api.getLogger().debug(this, module_info_left.getText());
-    }
-
-    public Entertainment getEntertainment() {
-        return entertainment;
     }
 
     public void setApi(API api) {
         this.api = api;
     }
 
-    public void setID(int id) {
+    public void setId(int id) {
         this.id = id;
-        module_id.setText(this.id + ".");
+        module_id.setText(id + ".");
     }
+
+    public Entertainment getEntertainment() {
+        return entertainment;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    /*
+     * when the module is clicked, it will send the entertainment information to the
+     * api. the api will then take the data and give it to the information viewer.
+     * based on the type of the entertainment, the viewer will change the template
+     * before adding it.
+     */
+    @FXML
+    public void onClicked() {
+
+        logger.log(this, ("Module clicked: " + entertainment.getFranchise()));
+
+        int placeID = (entertainment.getType().equals("Movie")) ? 1 : 2;
+        api.getMfController().sendEntertainment(placeID, entertainment);
+    }
+
 }

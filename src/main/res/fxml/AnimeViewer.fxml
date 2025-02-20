@@ -2,53 +2,39 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="693.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="693.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.frontend.controllers.AnimeViewerController">
    <children>
-      <Label fx:id="entertainment_type" alignment="CENTER" prefHeight="35.0" prefWidth="340.0" text="Anime" />
-      <Label fx:id="entertainment_franchise" alignment="CENTER" prefHeight="35.0" prefWidth="340.0" text="Miraculous" />
-      <Label fx:id="entertainment_title" alignment="CENTER" prefHeight="35.0" prefWidth="340.0" text="Tales of Ladybug and Cat Noir" />
-      <HBox prefHeight="36.0" prefWidth="340.0">
-         <children>
-            <Label fx:id="entertainment_info_left" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="169.0" text="Season 6" />
-            <Label fx:id="entertainment_info_right" alignment="CENTER" prefHeight="35.0" prefWidth="169.0" text="Episode 1" />
-         </children>
-      </HBox>
-      <Label fx:id="entertainment_status" alignment="CENTER" prefHeight="35.0" prefWidth="340.0" text="Upcoming" />
-      <Label fx:id="entertainment_release_date" alignment="CENTER" prefHeight="35.0" prefWidth="340.0" text="Release Date: Jan 24, 2025" />
-      <Label fx:id="entertainment_duration" alignment="CENTER" prefHeight="35.0" prefWidth="340.0" text="Duration: 22 min" />
-      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="340.0" tabClosingPolicy="UNAVAILABLE">
+      <Label fx:id="entertainment_type" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="340.0" text="Anime" VBox.vgrow="NEVER" />
+      <Label fx:id="entertainment_franchise" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="340.0" text="Miraculous" VBox.vgrow="NEVER" />
+      <Label fx:id="entertainment_title" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="340.0" text="Tales of Ladybug and Cat Noir" VBox.vgrow="NEVER" />
+      <Label fx:id="entertainment_info" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="340.0" text="Season 6 Episode 1" VBox.vgrow="NEVER" />
+      <Label fx:id="entertainment_primary_status" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="340.0" text="Upcoming" VBox.vgrow="NEVER" />
+      <Label fx:id="entertainment_release_date" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="340.0" text="Release Date: Jan 24, 2025" VBox.vgrow="NEVER" />
+      <Label fx:id="entertainment_duration" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="340.0" text="Duration: 22 min" VBox.vgrow="NEVER" />
+      <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="340.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
          <tabs>
             <Tab text="Tags">
                <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="275.0">
-                     <content>
-                        <GridPane fx:id="entertainment_tag_grid" prefHeight="409.0" prefWidth="322.0">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
-                     </content>
-                  </ScrollPane>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="entertainment_tag_grid" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="379.3333333333333" prefWidth="340.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
                </content>
             </Tab>
          </tabs>
       </TabPane>
-      <HBox prefHeight="30.0" prefWidth="340.0">
+      <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="340.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="entertainment_button_edit" mnemonicParsing="false" prefHeight="57.0" prefWidth="170.0" text="Edit" />
-            <Button fx:id="entertainment_button_copy" mnemonicParsing="false" prefHeight="57.0" prefWidth="170.0" text="Copy" />
+            <Button fx:id="entertainment_button_edit" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="57.0" prefWidth="170.0" text="Edit" HBox.hgrow="ALWAYS" />
+            <Button fx:id="entertainment_button_copy" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#copyEntertainmentName" prefHeight="57.0" prefWidth="170.0" text="Copy" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>

@@ -1,8 +1,13 @@
 package main.java.backend;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.fxml.FXMLLoader;
@@ -14,139 +19,96 @@ import main.java.backend.entertainment.Movie;
 import main.java.frontend.controllers.ModuleController;
 
 public class Backend {
-    API api;
 
-    private String[] raw_data;
-    private String[][] data;
+    private API api;
 
-    private BorderPane[] modules;
-    private Entertainment[] entertainments;
+    private ArrayList<String> rawData = new ArrayList<>();
+    private ArrayList<Entertainment> entertainmentList = new ArrayList<>();
 
     public Backend(API api) {
-
         this.api = api;
-        api.getLogger().log(this, "processes started");
-        this.startProccess();
     }
 
-    public void startProccess() {
-        readData();
-        setEntertainment();
-        setModules();
-        api.getLogger().log(this, "processes ended");
+    public void start() {
+        ArrayList<String[]> parsedData = readData();
+        setEntertainments(parsedData);
     }
 
-    private void setModules() {
-        api.getLogger().log(this, "Creating Modules");
-        try {
-            FXMLLoader moduleLoader = new FXMLLoader(getClass().getResource("../../res/fxml/Module.fxml"));
-            BorderPane module = moduleLoader.load();
-            ModuleController moduleController = moduleLoader.getController();
-            moduleController.setApi(api);
-            module.getProperties().put("controller", moduleController);
+    public ArrayList<String[]> readData() {
 
-            int id = 0;
-            for (Entertainment entertainment : entertainments) {
-                moduleController.setData(++id, entertainment);
-                modules[(id - 1)] = module;
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        api.getLogger().log(this, "Modules Created");
-    }
-
-    public BorderPane[] getModules() {
-        return modules;
-    }
-
-    private void setEntertainment() {
-        api.getLogger().log(this, "Creating Entertainments");
-        for (int i = 0; i < data.length; i++) {
-            String[] dataline = data[i];
-            switch (dataline[0]) {
-
-                case Entertainment.MOVIE:
-                    Movie movie = new Movie(dataline[0], dataline[1], dataline[2],
-                            parseDataL2(dataline[3]), parseDataL2(dataline[4]), Integer.parseInt(dataline[5]),
-                            dataline[6]);
-                    entertainments[i] = movie;
-                    break;
-
-                case Entertainment.ANIME:
-                    Anime anime = new Anime(dataline[0], dataline[1], dataline[2], parseDataL2(dataline[3]),
-                            parseDataL2(dataline[4]), Integer.parseInt(dataline[5]), Integer.parseInt(dataline[6]),
-                            dataline[7], Integer.parseInt(dataline[8]));
-
-                    entertainments[i] = anime;
-                    break;
-
-                default:
-                    api.getLogger().error(this, dataline[0] + " Not Found");
-            }
-        }
-        // System.out.println();
-        api.getLogger().log(this, "Loaded " + entertainments.length + " entertainment items");
-        api.getLogger().log(this, "Entertainments Created");
-    }
-
-    public Entertainment[] getEntertainments() {
-        return entertainments;
-    }
-
-    // the method gets and reads data in data file
-    private void readData() {
-        api.getLogger().log(this, "Reading Data");
-        // filepath for data.txt
-        String datafilepath = "D:/Programming/Java/Projects/Entertainment_Tracker/Group_3/data.txt";
-
-        int lines = 0; // no of lines in data.txt
-
-        // gets the number of lines in data.txt and set the values in raw_data
+        ArrayList<String[]> parsedData = new ArrayList<>();
         try {
 
-            File file = new File(datafilepath); // create file
-            Scanner filereader = new Scanner(file); // create filereader
+            // create filereader that reads from data.txt
+            BufferedReader fileReader = new BufferedReader(new FileReader(new File("src/main/res/data.txt")));
+            String line;
 
-            // get line count from file
-            while (filereader.hasNextLine()) {
-                filereader.nextLine();
-                lines++;
+            while ((line = fileReader.readLine()) != null) {
+
+                if (!(line.contains("//") || line.contains("Anime"))) {
+                    rawData.add(line); // raw data
+                    parsedData.add(line.split("<##>")); // level 1 parsed data
+                }
             }
-            filereader.close();
-
-            raw_data = new String[lines]; // create the raw_data array with the lines
-
-            // put the raw data into the array
-            filereader = new Scanner(file);
-            for (int i = 0; i < lines; i++) {
-                raw_data[i] = filereader.nextLine();
-            }
-            filereader.close();
+            fileReader.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            api.getLogger().error(this, e);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        data = new String[lines][]; // creating the array with the same lines
-        parseDataL1(raw_data); // passing in the raw_data for level 1 parsing
-
-        modules = new BorderPane[lines];
-        entertainments = new Entertainment[lines];
-        api.getLogger().log(this, "Data finished reading");
+        return parsedData;
     }
 
-    // level 1 data parsing
-    private void parseDataL1(String[] raw_data) {
-        for (int i = 0; i < raw_data.length; i++) {
-            data[i] = raw_data[i].split("<##>");
+    public Entertainment createEntertainment(String[] list) {
+        switch (list[0]) {
+            case "Movie":
+                return new Movie(
+                        list[0], // type
+                        list[1], // franchise
+                        list[2], // title
+                        list[3].split("<<>>"), // status
+                        list[4].split("<<>>"), // tags
+                        Integer.parseInt(list[5]), // duration
+                        LocalDate.parse(list[6]), // date
+                        list[7].split("<<>>")); // production companies
+            case "Anime":
+                return new Anime(
+                        list[0], // type
+                        list[1], // franchise
+                        list[2], // title
+                        list[3].split("<<>>"), // status
+                        list[4].split("<<>>"), // tags
+                        Integer.parseInt(list[5]), // season num
+                        Integer.parseInt(list[6]), // episode num
+                        LocalDate.parse(list[7]), // date
+                        Integer.parseInt(list[8])); // duration
+
+            default:
+                return new Entertainment(
+                        list[0], // type
+                        list[1], // franchise
+                        list[2], // title
+                        list[3].split("<<>>"), // status
+                        list[4].split("<<>>"), // tags
+                        LocalDate.parse(list[7]) // date
+                );
         }
     }
 
-    // level 2 data parsing
-    private String[] parseDataL2(String l2_unparsed_data) {
-        return l2_unparsed_data.split("<<>>");
+    public void setEntertainments(ArrayList<String[]> parsedData) {
+        for (String[] parsed : parsedData) {
+            entertainmentList.add(createEntertainment(parsed));
+        }
     }
+
+    public ArrayList<String> getRawData() {
+        return rawData;
+    }
+
+    public ArrayList<Entertainment> getEntertainmentList() {
+        return entertainmentList;
+    }
+
 }

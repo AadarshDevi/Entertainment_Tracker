@@ -1,0 +1,34 @@
+Movie
+Abominable
+
+1<<>>3
+2019
+97
+DreamWorks Animation<<>>Pearl Studio
+
+type<##>franchise<##>title<##>status<##>tags<##>runtime<##>release date<##>animation_companies
+
+Movie<##>Abominable<##>NVR<##>1<##>Abominable<##>97<##>2019<##>DreamWorks Animation<<>>Pearl Studio
+
+Old Status:
+    SEEN = 1;
+    NOT_SEEN = 2;
+
+    RELEASED = 3;
+    UPCOMING = 4;
+
+    SPECIAL = 5;
+
+    ONGOING = 6;
+    COMPLETED = 7;
+
+    PILOT = 8;
+
+
+New Status:
+    1: completed
+    2: released
+    3: upcoming
+
+    4: special
+    5: pilot

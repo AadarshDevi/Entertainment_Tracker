@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="886.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.frontend.controllers.EditorController">
+   <children>
+      <HBox layoutX="163.0" layoutY="139.0" prefHeight="501.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="544.0" prefWidth="468.0" spacing="7.5">
+               <children>
+                  <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="448.0">
+                     <left>
+                        <Button fx:id="button_previous" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="60.0" style="-fx-background-radius: 30 0 0 30;" text="&lt;" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                           <font>
+                              <Font name="SansSerif Bold" size="20.0" />
+                           </font>
+                        </Button>
+                     </left>
+                     <right>
+                        <Button fx:id="button_next" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="60.0" style="-fx-background-radius: 0 30 30 0;" text="&gt;" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                           <font>
+                              <Font name="SansSerif Bold" size="20.0" />
+                           </font>
+                        </Button>
+                     </right>
+                     <center>
+                        <TextField fx:id="module_id" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="190.0" style="-fx-background-radius: 0;" BorderPane.alignment="CENTER" />
+                     </center>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="4.0" />
+                     </padding>
+                  </BorderPane>
+                  <HBox prefHeight="33.0" prefWidth="458.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="100.0" text="Type:" />
+                        <TextField fx:id="entertainment_type" prefHeight="31.0" prefWidth="357.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="33.0" prefWidth="458.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="100.0" text="Franchise:" />
+                        <TextField fx:id="entertainment_franchise" prefHeight="31.0" prefWidth="357.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="33.0" prefWidth="458.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="100.0" text="Title:" />
+                        <TextField fx:id="entertainment_title" prefHeight="31.0" prefWidth="357.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="33.0" prefWidth="458.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="100.0" text="Release Date:" />
+                        <TextField fx:id="entertainment_release_date" prefHeight="31.0" prefWidth="357.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="33.0" prefWidth="458.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="100.0" text="Duration:" />
+                        <TextField fx:id="entertainment_duration" prefHeight="31.0" prefWidth="357.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="33.0" prefWidth="458.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="100.0" text="Season:" />
+                        <TextField fx:id="entertainment_season_number" prefHeight="31.0" prefWidth="357.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="33.0" prefWidth="458.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="100.0" text="Episode:" />
+                        <TextField fx:id="entertainment_episode_number" prefHeight="31.0" prefWidth="357.0" />
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="465.0" text="Status:">
+                     <font>
+                        <Font name="System Bold" size="14.666666984558105" />
+                     </font>
+                     <padding>
+                        <Insets right="-10.0" />
+                     </padding>
+                  </Label>
+                  <GridPane prefHeight="150.0" prefWidth="448.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <CheckBox fx:id="entertainment_status_1" mnemonicParsing="false" prefHeight="54.0" prefWidth="224.0" text="Completed" />
+                        <CheckBox fx:id="entertainment_status_2" mnemonicParsing="false" prefHeight="54.0" prefWidth="224.0" text="Released" GridPane.columnIndex="1" />
+                        <CheckBox fx:id="entertainment_status_3" mnemonicParsing="false" prefHeight="54.0" prefWidth="243.0" text="Upcoming" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="entertainment_status_4" mnemonicParsing="false" prefHeight="54.0" prefWidth="243.0" text="Special" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="entertainment_status_5" mnemonicParsing="false" prefHeight="54.0" prefWidth="224.0" text="Pilot" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="501.0" prefWidth="418.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="47.0" prefWidth="414.0" text="Production Companies">
+                     <font>
+                        <Font name="SansSerif Regular" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="entertainment_production_companies" prefHeight="245.0" prefWidth="398.0" />
+                  <Label alignment="CENTER" prefHeight="47.0" prefWidth="414.0" text="Tags">
+                     <font>
+                        <Font name="SansSerif Regular" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="entertainment_tags" prefHeight="229.0" prefWidth="413.0" />
+               </children>
+               <HBox.margin>
+                  <Insets bottom="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

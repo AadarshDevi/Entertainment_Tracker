@@ -38,8 +38,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -55,32 +53,17 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem fx:id="app_quit" mnemonicParsing="false" onAction="#application_quit" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
           <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
+                  <Menu mnemonicParsing="false" text="Entertainment">
+                    <items>
+                      <MenuItem fx:id="edit_entertainment_add" mnemonicParsing="false" text="Add" />
+                  <MenuItem fx:id="edit_entertainment_edit" mnemonicParsing="false" text="Edit" />
+                    </items>
+                  </Menu>
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
@@ -98,7 +81,7 @@
             <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="36.0" prefWidth="1099.0" BorderPane.alignment="CENTER">
                <children>
                   <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="119.0" text="Search:" />
-                  <TextField fx:id="search_field" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="36.0" prefWidth="1376.0" />
+                  <TextField fx:id="search_field" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#searchController" prefHeight="36.0" prefWidth="1376.0" />
                   <Button fx:id="search_button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="36.0" prefWidth="62.0">
                      <font>
                         <Font size="14.0" />
@@ -112,38 +95,38 @@
               <tabs>
                 <Tab text="Completed">
                      <content>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                           <content>
-                              <ListView fx:id="list_completed" prefHeight="1030.0" prefWidth="1082.0" />
-                           </content>
-                        </ScrollPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ListView fx:id="list_completed" prefHeight="874.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
                      </content>
                 </Tab>
                   <Tab text="Released">
                      <content>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                           <content>
-                              <ListView fx:id="list_released" prefHeight="1030.0" prefWidth="1082.0" />
-                           </content>
-                        </ScrollPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ListView fx:id="list_released" prefHeight="874.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
                      </content>
                   </Tab>
                   <Tab text="Upcoming">
                      <content>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                           <content>
-                              <ListView fx:id="list_upcoming" prefHeight="1030.0" prefWidth="1082.0" />
-                           </content>
-                        </ScrollPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ListView fx:id="list_upcoming" prefHeight="874.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="Search">
+                  <Tab fx:id="search_tab" text="Search">
                      <content>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                           <content>
-                              <ListView fx:id="list_search" prefHeight="1030.0" prefWidth="1082.0" />
-                           </content>
-                        </ScrollPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ListView fx:id="list_search" prefHeight="874.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
                      </content>
                   </Tab>
               </tabs>
