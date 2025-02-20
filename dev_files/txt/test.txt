@@ -1,0 +1,101 @@
+Data file filepath: D:/Programming/Java/Projects/Entertainment_Tracker/Group_3/data.txt
+
+type<##>franchise<##>title<##>status<##>tags<##>season num<##>episode num<##>release date<##>runtime
+
+Tokens:
+<##> : section seperator
+<<>> : status/tag seperator
+
+Status:
+1: completed
+2: released
+3: upcoming
+
+Other status:
+4: special
+5: pilot
+
+< --------------------------------------------- Anime Parsing -------------------------------------------- >
+
+
+// season 6 ep 1 of miraculous ladybug
+
+Before Parsing:
+Anime<##>Miraculous<##>Tales of Ladybug and Cat Noir<##>3<##>miraculous<<>>miraculous ladybug<##>6<##>1<##>2025-01-25<##>22
+
+After Parsing:
+{
+    type: Anime,
+    franchise: Miraculous,
+    title: Tales of Ladybug and Cat Noir,
+    status: {
+        completed: false,
+        released: false,
+        upcoming: true,
+        special: false,
+        pilot: false
+    }
+    tag: {
+        miraculous,
+        miraculous ladybug
+    },
+    season: 6,
+    episode: 1,
+    date: 2025-01-25,
+    duration: 22
+}
+
+// lego ninjago secrets of the forbidden spinjitsu
+
+Before Parsing:
+Anime<##>LEGO Ninjago Master of Spinjitsu<##>Secrets of the Forbidden Spinjitzu<##>1<##>forbidden spinjitsu<<>>lego ninjago season 11<##>11<##>30<##>2019-10-28<##>11
+
+After Parsing:
+{
+    type: Anime,
+    franchise: LEGO Ninjago Master of Spinjitsu,
+    title: Secrets of the Forbidden Spinjitzu,
+    status: {
+        completed: true,
+        released: false,
+        upcoming: false,
+        special: false,
+        pilot: false
+    },
+    tag: [
+        forbidden spinjitsu,
+        lego ninjago season 11
+    ],
+    season: 11,
+    episode: 30,
+    date: 2019-10-28,
+    duration: 11
+}
+
+< --------------------------------------------- Movie Parsing -------------------------------------------- >
+
+
+// Miraculous: Tales of Ladybug and Cat Noir, The Movie
+
+Before Parsing:
+Movie<##>Miraculous<##>Tales of Ladybug and Cat Noir, The Movie<##>1<##>miraculous movie<<>>miraculous ladybug movie<##>105<##>2023-07-28
+
+After Parsing:
+{
+    type: Movie,
+    franchise: Miraculous,
+    title: Tales of Ladybug and Cat Noir, The Movie,
+    status: {
+        completed: true,
+        released: false,
+        upcoming: false,
+        special: false,
+        pilot: false
+    },
+    tag: [
+        miraculous movie,
+        miraculous ladybug movie
+    ],
+    date: 2023-07-28,
+    duration: 105
+}
