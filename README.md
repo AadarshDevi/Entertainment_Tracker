@@ -1,7 +1,7 @@
 ## Entertainment Tracker
 
-Dev Version: 3.1.A.0.1
-Release Version: A.0.1
+- Dev Version: 3.1.A.0.1
+- Release Version: A.0.1
 
 ## Project Information
 
