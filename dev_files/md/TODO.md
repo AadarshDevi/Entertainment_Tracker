@@ -18,6 +18,10 @@
 
   > for writing data to data.txt
 
+- [ ] when searching, make the search tab active.
+
+  > if i am on completed, etc tab and search "text", it should go to search tab and show the results
+
 - [ ] make code module (again 2nd time)
 
 - [ ] convert project into an .exe using Launch4J

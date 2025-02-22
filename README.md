@@ -34,3 +34,11 @@
 
 - <##> : section seperator
 - <<>> : status/tag seperator
+
+## Project Sub Goals
+
+- [ ] Create App UI
+- [ ] Create Module UI
+- [ ] Add seardch feature for search tab
+- [ ] View movies, tv shows and anime
+- [ ] Create Main UI
