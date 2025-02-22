@@ -147,6 +147,8 @@
 
 - a simple search algorithm instead of the old incremental search
 
+- movies can be viewed in the viewer. (but not animes/tv shows)
+
 ## Removed
 
 - the ability to view animes

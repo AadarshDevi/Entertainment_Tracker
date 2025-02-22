@@ -41,5 +41,7 @@
 - [x] Create Module UI
 - [x] Add search feature for search tab
 - [ ] View movies, tv shows and anime
+  > [x] movies
+  > [ ] anime / tv shows
 - [x] Create Entertainment UI
 - [ ] add movies and tv shows

@@ -2,7 +2,7 @@
 
 ## List
 
-- [ ] TODO: show entertainment in viewer when module is clicked
+- [ ] TODO: show anime/tv shows in viewer when module is clicked
 
   > all of the work for this is in mainframe
 
@@ -66,3 +66,6 @@
 - [x] when searching, make the search tab active.
 
   > if i am on completed, etc tab and search "text", it should go to search tab and show the results
+
+- [x] show movies in viewer when module is clicked
+  > all of the work for this is in mainframe
