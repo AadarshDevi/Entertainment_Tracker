@@ -6,27 +6,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.BorderPane;
 import main.java.api.API;
 import main.java.backend.entertainment.Anime;
 import main.java.backend.entertainment.Entertainment;
 import main.java.backend.entertainment.Movie;
-import main.java.frontend.controllers.ModuleController;
 
 public class Backend {
 
-    private API api;
+    // private API api;
 
     private ArrayList<String> rawData = new ArrayList<>();
     private ArrayList<Entertainment> entertainmentList = new ArrayList<>();
 
     public Backend(API api) {
-        this.api = api;
+        // this.api = api;
     }
 
     public void start() {

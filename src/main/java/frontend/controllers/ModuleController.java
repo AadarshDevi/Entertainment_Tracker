@@ -86,6 +86,14 @@ public class ModuleController {
             default:
                 break;
         }
+
+        module_id.setVisible(true);
+        module_name.setVisible(true);
+        module_info_left.setVisible(true);
+        module_info_right.setVisible(true);
+
+        // Force layout update
+        // list_completed.getParent().layout();
     }
 
     public void setApi(API api) {

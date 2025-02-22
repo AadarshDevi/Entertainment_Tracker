@@ -16,13 +16,11 @@ public class MovieViewerController {
 
     private API api;
 
-    @SuppressWarnings("rawtypes")
     @FXML
-    private ListView movie_tags;
+    private ListView<Label> movie_tags;
 
-    @SuppressWarnings("rawtypes")
     @FXML
-    private ListView movie_production_companies;
+    private ListView<Label> movie_production_companies;
 
     @FXML
     private Button entertainment_button_edit;

@@ -115,7 +115,7 @@ public class EditorController {
 
     public void bulkEditEntertainment(Entertainment[] entertainments) {
 
-        Entertainment[] bulkList = new Entertainment[entertainments.length];
+        // Entertainment[] bulkList = new Entertainment[entertainments.length];
 
     }
 }

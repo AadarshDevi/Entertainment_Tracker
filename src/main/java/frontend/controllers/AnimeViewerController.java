@@ -37,9 +37,8 @@ public class AnimeViewerController {
     @FXML
     private Label entertainment_duration;
 
-    @SuppressWarnings("rawtypes")
     @FXML
-    private ListView entertainment_tag_grid;
+    private ListView<Label> entertainment_tag_grid;
 
     @FXML
     private Button entertainment_button_edit;

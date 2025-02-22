@@ -2,11 +2,9 @@ package main.java.api;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 import main.java.backend.Backend;
 import main.java.backend.SearchEngine.IncrementalSearch;
-import main.java.backend.entertainment.Entertainment;
 import main.java.frontend.controllers.MainFrameController;
 
 public class API {

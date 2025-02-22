@@ -29,6 +29,26 @@ public class IncrementalSearch {
         // searchHistory = new SearchHistory(originalList);
     }
 
+    public ArrayList<Integer> simpleSearch(String phrase) {
+
+        resetEngine();
+
+        ArrayList<Integer> searchIndexes = new ArrayList<>();
+
+        int i = 1;
+
+        for (String string : originalList) {
+            if (string.toLowerCase().contains(phrase.toLowerCase())) {
+                searchIndexes.add(i);
+                System.out.println("Index: " + i + " :: String: " + string.substring(9, 25));
+            }
+            i++;
+        }
+        System.out.println();
+
+        return searchIndexes;
+    }
+
     public ArrayList<Integer> search(String phrase) {
 
         resetEngine();

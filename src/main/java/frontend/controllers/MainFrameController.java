@@ -4,9 +4,14 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
@@ -56,9 +61,15 @@ public class MainFrameController {
     private Button search_button;
 
     private API api;
+
+    // modules in completed, released and upcoming tabs
     private ArrayList<BorderPane> modules = new ArrayList<>();
-    private ArrayList<BorderPane> searchModules = new ArrayList<>();
-    private ArrayList<Integer> searchResults = new ArrayList<>();
+
+    // modules in search tab
+    private ArrayList<BorderPane> ogSearchModules = new ArrayList<>();
+
+    // the ids of the modules in search
+    private ArrayList<Integer> searchResults;
 
     private int list_completed_number = 0;
     private int list_released_number = 0;
@@ -76,26 +87,25 @@ public class MainFrameController {
     @FXML
     private void initialize() {
 
-        // search_field.setOnKeyPressed(event -> {
-        // // Get current text BEFORE processing event
-        // String currentText = search_field.getText();
-        // if (event.getCode() == KeyCode.ENTER) {
-        // System.out.println("\n\nActual Text: '" + currentText + "'");
-        // System.out.println(">>> Search Text: '" + currentText + "'");
-        // ArrayList<Integer> searchResults = api.getSearchEngine().search(currentText);
-        // for (Integer integer : searchResults) {
-        // integer += 1000;
-        // }
-        // searchController();
-        // System.out.println("Current Search List: " +
-        // api.getSearchEngine().getCurrentSearchList().size());
-        // } else if (currentText.isEmpty()) {
-        // System.out.println("\n\n>>> Resetting Search Engine");
-        // api.getSearchEngine().resetEngine();
-        // System.out.println("Current Search List: " +
-        // api.getSearchEngine().getCurrentSearchList().size());
-        // }
-        // });
+        search_field.setOnKeyPressed(event -> {
+            // Get current text BEFORE processing event
+            String currentText = search_field.getText();
+            if (event.getCode() == KeyCode.ENTER) {
+                System.out.println("\n\nActual Text: '" + currentText + "'");
+                System.out.println(">>> Search Text: '" + currentText + "'");
+                searchResults = api.getSearchEngine().simpleSearch(currentText);
+
+                searchController();
+                System.out.println("Current Search List: " +
+                        api.getSearchEngine().getCurrentSearchList().size());
+
+            } else if (currentText.isEmpty()) {
+                System.out.println("\n\n>>> Resetting Search Engine");
+                api.getSearchEngine().resetEngine();
+                System.out.println("Current Search List: " +
+                        api.getSearchEngine().getCurrentSearchList().size());
+            }
+        });
     }
 
     public void connectAPI(API api) {
@@ -104,14 +114,15 @@ public class MainFrameController {
 
     public void setModules(ArrayList<Entertainment> list) {
         for (int i = 0; i < list.size(); i++) {
+
             BorderPane module = createModule(list.get(i), (i + 1));
             modules.add(module);
-            BorderPane duplicate = createModule(list.get(i), ++list_search_number);
 
-            searchModules.add(duplicate);
+            BorderPane duplicate = createModule(list.get(i), ++list_search_number);
+            ogSearchModules.add(duplicate);
         }
 
-        list_search.getItems().addAll(searchModules);
+        list_search.getItems().addAll(new ArrayList<>(ogSearchModules));
     }
 
     /*
@@ -249,38 +260,82 @@ public class MainFrameController {
 
     @FXML
     private void searchController() {
-        // resetSearchListView();
-        // search();
+        resetSearchListView();
+        search();
     }
 
-    // public void search() {
-    // // Create a list to hold modules to remove
-    // List<BorderPane> modulesToRemove = new ArrayList<>();
+    /**
+     * get the original list and duplicate it
+     * get a list of the modules to remove
+     */
+    public void search() {
 
-    // for (BorderPane module : list_search.getItems()) {
-    // ModuleController mController = (ModuleController)
-    // module.getProperties().get("controller");
+        // remove all modules in list_search
+        list_search.getItems().clear();
 
-    // // Check if the current module's ID is not in searchResults
-    // if (!searchResults.contains(mController.getId())) {
-    // modulesToRemove.add(module); // Mark for removal
-    // System.out.println(
-    // ">>> Removed ID: " + mController.getId() +
-    // " >>> Primary Status: " + mController.getEntertainment().getPrimaryStatus() +
-    // " >>> Franchise: " + mController.getEntertainment().getFranchise());
-    // }
-    // }
+        // the modules that will be removed from this list
+        ArrayList<BorderPane> duplicateSearchList = new ArrayList<>(ogSearchModules);
 
-    // // Remove all marked modules from the ListView
-    // list_search.getItems().removeAll(modulesToRemove);
-    // list_search.refresh();
-    // }
+        // this list contains modules to be removed
+        ArrayList<BorderPane> removedModules = new ArrayList<>();
 
-    // public void resetSearchListView() {
-    // list_search.getItems().clear(); // set listview to have nothing
-    // list_search.getItems().addAll(new ArrayList<>(modules));
-    // list_search.refresh();
-    // }
+        // the id from the search results
+        int moduleIdArray = 0;
+
+        // going through the list of search modules
+        for (BorderPane borderPane : duplicateSearchList) {
+
+            // module controller of the module
+            ModuleController mController = (ModuleController) (borderPane.getProperties().get("controller"));
+
+            // id of module
+            int moduleID = mController.getId();
+
+            // id from search array
+            int searchID = 0;
+            if (moduleIdArray < searchResults.size()) {
+                searchID = searchResults.get(moduleIdArray);
+            }
+
+            if (moduleID == searchID) {
+                moduleIdArray++;
+                System.out.println(
+                        "Module ID: " + moduleID + " :: Franchise: " +
+                                mController.getEntertainment().getFranchise());
+
+            } else {
+                removedModules.add(borderPane);
+            }
+
+        }
+
+        duplicateSearchList.removeAll(removedModules);
+        list_search.getItems().addAll(duplicateSearchList);
+
+        System.out.println(
+                "duplicateSearchList Length: " + duplicateSearchList.size() +
+                        " :: duplicateSearchList Length: " + searchResults.size());
+
+        if (duplicateSearchList.size() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Your search \"" + search_field.getText() + "\" was not found in the database",
+                    "Search Not Found",
+                    JOptionPane.INFORMATION_MESSAGE);
+            resetSearchListView();
+        }
+
+    }
+
+    public void resetSearchListView() {
+        list_search.getItems().clear(); // set listview to have nothing
+        list_search.getItems().addAll(new ArrayList<>(ogSearchModules));
+
+        // fixes the problem where modules disappear when searching
+        list_search.refresh();
+        list_completed.refresh();
+        list_released.refresh();
+        list_upcoming.refresh();
+    }
 
     @FXML
     private void application_quit() {

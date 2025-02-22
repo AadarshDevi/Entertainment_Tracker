@@ -10,7 +10,6 @@ import main.java.frontend.controllers.MainFrameController;
 public class Client extends Application {
 
     public static void main(String[] args) {
-
         launch(args);
     }
 
