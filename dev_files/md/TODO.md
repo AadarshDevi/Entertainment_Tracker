@@ -26,6 +26,8 @@
 
 - [ ] create file to store settings information and read it after app is set up
 
+- [ ] reenable app to read anime and tv shows
+
 ## Completed
 
 ### Jan 03, 2025 - Jan 13, 2025
