@@ -16,19 +16,15 @@
 
   > for writing data to data.txt
 
-- [ ] when searching, make the search tab active.
-
-  > if i am on completed, etc tab and search "text", it should go to search tab and show the results
-
 - [ ] make code module (again 2nd time)
 
 - [ ] convert project into an .exe using Launch4J
 
-- create Episodes so i can add miraculous ladybug season 6 eps and release dates, duration and ep number
+- [ ] create Episodes so i can add miraculous ladybug season 6 eps and release dates, duration and ep number
 
   > can be viewed like the tags
 
-- create file to store settings information and read it after app is set up
+- [ ] create file to store settings information and read it after app is set up
 
 ## Completed
 
@@ -64,3 +60,7 @@
 
 - [x] write new search algorithm
 - [x] integrate new search algorithm in app
+
+- [x] when searching, make the search tab active.
+
+  > if i am on completed, etc tab and search "text", it should go to search tab and show the results
