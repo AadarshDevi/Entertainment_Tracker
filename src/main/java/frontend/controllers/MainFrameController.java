@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
@@ -26,6 +27,9 @@ import main.java.backend.entertainment.Entertainment;
 import main.java.backend.entertainment.Movie;
 
 public class MainFrameController {
+
+    @FXML
+    private TabPane tabPane;
 
     @FXML
     private ListView<BorderPane> list_completed;
@@ -323,6 +327,8 @@ public class MainFrameController {
                     JOptionPane.INFORMATION_MESSAGE);
             resetSearchListView();
         }
+
+        tabPane.getSelectionModel().select(3);
 
     }
 
