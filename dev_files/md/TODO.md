@@ -10,6 +10,7 @@
   - [ ] add anime viewer to the app.
 
 - [x] make the ui for editing a movie, anime
+  > it will use the ogSearchModules
 - [ ] show entertainment in editor when edit button for the entertainment is clicked
 
 - [ ] toString will be int the data format (see data.txt)
