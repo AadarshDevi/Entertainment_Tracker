@@ -2,15 +2,12 @@
 
 ## List
 
-- [x] TODO: duplicate modules and put it in search tab
-
-- [x] Make module send the tags and production companies so viewer can view them.
-
-- [x] TODO: write new search algorithm
-- [ ] TODO: integrate new search algorithm in app
-
-- [x] set viewers and editor's fxml and controllers
 - [ ] TODO: show entertainment in viewer when module is clicked
+
+  > it is the mainframe problem not viewer problem
+
+  - [ ] add movie viewer to the app.
+  - [ ] add anime viewer to the app.
 
 - [x] make the ui for editing a movie, anime
 - [ ] show entertainment in editor when edit button for the entertainment is clicked
@@ -21,7 +18,12 @@
 
   > for writing data to data.txt
 
+- [ ] make code module (again 2nd time)
+
 - [ ] convert project into an .exe using Launch4J
+
+- create Episodes so i can add miraculous ladybug season 6 eps and release dates, duration and ep number
+  > can be viewed like the tags
 
 ## Completed
 
@@ -44,3 +46,12 @@
 ### Jan 15, 2025
 
 - [x] write the toString for the entertainments
+
+- [x] TODO: duplicate modules and put it in search tab
+- [x] Make module send the tags and production companies so viewer can view them.
+- [x] set viewers and editor's fxml and controllers
+
+### Feb 22, 2025
+
+- [x] TODO: write new search algorithm
+- [x] TODO: integrate new search algorithm in app

@@ -141,12 +141,46 @@
 
 ---
 
-# mmm dd, yyyy
+# Feb 22, 2025
 
 ## Added
 
+- a simple search algorithm instead of the old incremental search
+
 ## Removed
+
+- the ability to view animes
+- the ability to view movies
+
+- app will not read anything other than movies
 
 ## Fixed
 
+- lists were refreshed fixing invisible modules
+- the wrong module list was being put in search list.
+  > the modules list (containing all modules in the other three lists other than search) was being used to add in search list. (search list modules were not used before fix)
+
 ## Problems
+
+- Modules in completed, released upcoming and search lists were being invisible
+- when searching modules from other lists were added in it.
+
+---
+
+# mmm dd, yyyy
+
+---
+
+# mmm dd, yyyy
+
+---
+
+# mmm dd, yyyy
+
+---
+
+# mmm dd, yyyy
+
+---
+
+# mmm dd, yyyy
