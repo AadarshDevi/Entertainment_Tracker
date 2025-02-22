@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.VBox;
 import main.java.api.API;
 import main.java.backend.entertainment.Movie;
 
@@ -45,6 +46,9 @@ public class MovieViewerController {
 
     @FXML
     private Label entertainment_duration;
+
+    @FXML
+    private VBox root_pane;
 
     private Movie movie;
 
@@ -138,16 +142,22 @@ public class MovieViewerController {
         }
 
         // loads CenterLabel
-        FXMLLoader center_label_loader = new FXMLLoader(
-                getClass().getResource("../../../res/fxml/CenterLabel.fxml"));
+        // FXMLLoader center_label_loader = new FXMLLoader(
+        // getClass().getResource("../../../res/fxml/CenterLabel.fxml"));
 
         // add production companies
+        movie_production_companies.getItems().clear();
+
+        System.out.println(movie.getAnimationCompanies().length);
+
         try {
             for (String production_company : movie.getAnimationCompanies()) {
-                // FXMLLoader center_label_loader = new FXMLLoader(
-                // getClass().getResource("../../../res/fxml/CenterLabel.fxml"));
+                FXMLLoader center_label_loader = new FXMLLoader(
+                        getClass().getResource("../../../res/fxml/CenterLabel.fxml"));
                 Label label = center_label_loader.load();
                 CenterLabelController clc = center_label_loader.getController();
+
+                System.out.println(production_company);
 
                 clc.setText(production_company);
                 movie_production_companies.getItems().add(label);
@@ -155,8 +165,8 @@ public class MovieViewerController {
 
             // add tags
             for (String tag : movie.getTags()) {
-                // FXMLLoader center_label_loader = new FXMLLoader(
-                // getClass().getResource("../../../res/fxml/CenterLabel.fxml"));
+                FXMLLoader center_label_loader = new FXMLLoader(
+                        getClass().getResource("../../../res/fxml/CenterLabel.fxml"));
                 Label label = center_label_loader.load();
                 CenterLabelController clc = center_label_loader.getController();
 
@@ -194,6 +204,10 @@ public class MovieViewerController {
 
     public void setApi(API api) {
         this.api = api;
+    }
+
+    public void setSize(double width, double height) {
+        root_pane.setPrefSize(width, height);
     }
 
 }

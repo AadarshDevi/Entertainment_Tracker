@@ -232,6 +232,13 @@ public class MainFrameController {
         switch (placeID) {
             // MovieViewer
             case 1:
+                information_viewer_stand_in.getChildren().clear();
+
+                mvController.setSize(
+                        information_viewer_stand_in.getWidth(),
+                        information_viewer_stand_in.getHeight());
+
+                information_viewer_stand_in.getChildren().add(movieViewer);
                 mvController.view((Movie) entertainment);
                 break;
 
