@@ -37,8 +37,9 @@
 
 ## Project Sub Goals
 
-- [ ] Create App UI
-- [ ] Create Module UI
-- [ ] Add seardch feature for search tab
+- [x] Create App UI
+- [x] Create Module UI
+- [x] Add search feature for search tab
 - [ ] View movies, tv shows and anime
-- [ ] Create Main UI
+- [x] Create Entertainment UI
+- [ ] add movies and tv shows
