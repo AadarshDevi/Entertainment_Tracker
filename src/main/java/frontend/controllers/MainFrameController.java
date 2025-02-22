@@ -339,5 +339,6 @@ public class MainFrameController {
 
     @FXML
     private void application_quit() {
+        System.exit(0);
     }
 }

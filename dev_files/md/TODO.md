@@ -4,14 +4,11 @@
 
 - [ ] TODO: show entertainment in viewer when module is clicked
 
-  > it is the mainframe problem not viewer problem
+  > all of the work for this is in mainframe
 
-  - [ ] add movie viewer to the app.
-  - [ ] add anime viewer to the app.
-
-- [x] make the ui for editing a movie, anime
-  > it will use the ogSearchModules
 - [ ] show entertainment in editor when edit button for the entertainment is clicked
+
+  > it will use the ogSearchModules
 
 - [ ] toString will be int the data format (see data.txt)
 - [ ] make the writeData method to write the data back to data.txt
@@ -28,7 +25,10 @@
 - [ ] convert project into an .exe using Launch4J
 
 - create Episodes so i can add miraculous ladybug season 6 eps and release dates, duration and ep number
+
   > can be viewed like the tags
+
+- create file to store settings information and read it after app is set up
 
 ## Completed
 
@@ -48,15 +48,19 @@
 
   > when the search results have returned from search engine, use it to remove unwanted modules and keep the ones needed.
 
+  - [x] add movie viewer to the app.
+  - [x] add anime viewer to the app.
+
 ### Jan 15, 2025
 
 - [x] write the toString for the entertainments
 
-- [x] TODO: duplicate modules and put it in search tab
+- [x] duplicate modules and put it in search tab
 - [x] Make module send the tags and production companies so viewer can view them.
 - [x] set viewers and editor's fxml and controllers
+- [x] make the ui for editing a movie, anime
 
 ### Feb 22, 2025
 
-- [x] TODO: write new search algorithm
-- [x] TODO: integrate new search algorithm in app
+- [x] write new search algorithm
+- [x] integrate new search algorithm in app
