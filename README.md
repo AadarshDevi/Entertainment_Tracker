@@ -1,7 +1,7 @@
 ## Entertainment Tracker
 
-- Dev Version: 3.1.A.0.1
-- Release Version: A.0.1
+- Dev Version: 3.1.A.1.5
+- Release Version: A.1.5
 
 ## Project Information
 
@@ -9,8 +9,8 @@
 - Group: 3
 - Build: 1
 - Major Version: A
-- Minor Version: 0
-- Patch Version: 1
+- Minor Version: 1
+- Patch Version: 5
 
 ## Project Description
 
