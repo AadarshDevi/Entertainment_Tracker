@@ -1,14 +1,15 @@
 ## Entertainment Tracker
 
-- Dev Version: 3.1.A.1.6
-- Release Version: A.1.6
+- Dev Version: 3.1.A.1.1.6
+- Release Version: A.1.1.6
 
 ## Project Information
 
 - Name: Entertainment Tracker
-- Group: 3
-- Build: 1
-- Major Version: A
+- Group: 3 (Does not change)
+- Build: 1 (Does not change)
+- State: A (Alpha)
+- Major Version: 1
 - Minor Version: 1
 - Patch Version: 5
 

@@ -1,6 +1,6 @@
 # Entertainment Tracker Change Log
 
-## Feb 22, 2025
+## Feb 22, 2025 >> Version 3.1.A.1.2.0
 
 ### Added
 
@@ -13,9 +13,6 @@
 ### Removed
 
 - the ability to view animes
-- the ability to view movies
-
-- app will not read anything other than movies
 
 ### Fixed
 
@@ -23,14 +20,18 @@
 - the wrong module list was being put in search list.
   > the modules list (containing all modules in the other three lists other than search) was being used to add in search list. (search list modules were not used before fix)
 
+### Changed
+
+- Search will no longer use characters. it will instead use the text in search bar
+
 ### Problems
 
-- Modules in completed, released upcoming and search lists were being invisible
-- when searching modules from other lists were added in it.
+- (FIXED) Modules in completed, released upcoming and search lists were being invisible
+- (FIXED) when searching modules from other lists were added in it.
 
 - checkboxes in status are not being disable based on mouse or action events or even the primary status
 
-## Jan 24, 25, 26, 2025
+## Jan 24, 25, 26, 2025 >> Version 3.1.A.1.1.10
 
 ### Added
 
@@ -42,8 +43,6 @@
 - flow chart created for the startup of the app.
   > check the app_start.txt
 - app startup reorganized
--
-- code re-written
 
   - client
   - api
@@ -59,9 +58,9 @@
 
 ### Problems
 
-- search engine unable to be integrated because the modules in complted list are having their data removed. and in search list, all the modules are removed.
+- (FIXED) search engine unable to be integrated because the modules in complted list are having their data removed. and in search list, all the modules are removed.
 
-## Jan 15, 2025
+## Jan 15, 2025 >> Version 3.1.A.1.1.2
 
 ### Added
 
@@ -83,12 +82,12 @@
 - copy button in viewers for entertainment are used for the copy entertainment name using same logixc used when showing it in the module.
 - formatting from data file fixed in Movie, Anime viewer and Module.
 
-- button layout for anime viewer fxml fixed.
+- (FIXED) button layout for anime viewer fxml fixed.
 
-## Jan 13, 2025
+## Jan 13, 2025 >> Version 3.1.A.1.1.0
 
 - Built SearchEngine and corresponding ui changes.
-- (FIXME) Results are showing 0 instead of 5 (5 Movies in list)
+- (FIXED) Results are showing 0 instead of 5 (5 Movies in list)
   > it works when the logging is present.
 - Somehow fixed the problem.
 - Code Files Changed:
@@ -100,7 +99,7 @@
 - when the duration is set to 0, the viewer and module will display unknown.
 - when the date is set to 3000-12-10, the viewer and module will display unknown.
 
-## Jan 12, 2025
+## Jan 12, 2025 >> Version 3.1.A.1.0.15
 
 - fixed movie format by adding animation companies
 - commenting Backend.java for better understanding of Problem #1.
@@ -114,7 +113,7 @@
 - mainframe.fxml fixe:
   > removed scrollpane because listview has scrolling
 
-## Jan 10, 2025
+## Jan 10, 2025 >> Version 3.1.A.1.0.8
 
 - mainframe ui in client rerouted to MainFrame.fxml
 - module controller added
@@ -124,9 +123,9 @@
 - ConsoleLog.java file created
 - mainframe controller added
 - FXMLS edited extensively
-- (FIXME) the last module in the list is showing its information and the ones before it don't show it. only the last module is showing the information.
+- (FIXED) the last module in the list is showing its information and the ones before it don't show it. only the last module is showing the information.
 
-## Jan 3, 2025
+## Jan 3, 2025 >> Version 3.1.A.1.0.0
 
 - Project Created
 
@@ -176,6 +175,10 @@
 - placeholder
 
 ### Removed
+
+- placeholder
+
+### Changed
 
 - placeholder
 

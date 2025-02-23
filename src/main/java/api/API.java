@@ -16,60 +16,6 @@ import main.java.frontend.controllers.MainFrameController;
 
 public class API {
 
-    // private MainFrameController mfController;
-    // private Backend backend;
-    // private ConsoleLog logger;
-    // private SearchEngine searchEngine;
-
-    public API() {
-        // logger = new ConsoleLog();
-        // backend = new Backend(this);
-        // searchEngine = new SearchEngine(this, backend.getRawData());
-    }
-
-    // public void setMainUIController(MainFrameController mfController) {
-    // this.mfController = mfController;
-    // }
-
-    // public void setUIModules() {
-    // mfController.loadModules(backend.getModules());
-    // mfController.searchSetup();
-    // }
-
-    // public ConsoleLog getLogger() {
-    // return logger;
-    // }
-
-    // public void application_close() {
-    // backend.app_quit();
-    // }
-
-    // public void viewModuleData(Entertainment entertainment) {
-    // mfController.loadViewers();
-    // mfController.view(entertainment);
-    // }
-
-    // public ArrayList<Integer> searchPhrase(String string) {
-
-    // logger.debug(this, "Search String: " + string);
-
-    // ArrayList<Integer> result;
-
-    // if (string.equals(""))
-    // result = searchEngine.cmd(string);
-    // else if (string.charAt(0) == '#')
-    // result = new ArrayList<>();
-    // else
-    // result = searchEngine.search(string);
-
-    // return result;
-    // }
-
-    // // TODO: get the entertainmnets from the search modules and send them
-    // public Entertainment[] getDataFromApp() {
-    // return new Entertainment[20];
-    // }
-
     private Backend backend;
     private IncrementalSearch engine;
 
@@ -81,54 +27,89 @@ public class API {
     private Stage entertainmentEditor;
     private Scene editorScene;
 
+    private boolean editorDisabled;
+
+    // Basic Constructor
+    public API() {
+    }
+
+    // creates the backend and search engine
     public void createBackend() {
         backend = new Backend(this);
         engine = new IncrementalSearch(50);
     }
 
-    public Backend getBackend() {
-        return backend;
-    }
-
-    public IncrementalSearch getSearchEngine() {
-        return engine;
-    }
-
+    // connects api to mainframe controller
     public void connectMainFrameController(MainFrameController mfController) {
         this.mfController = mfController;
     }
 
+    // the entertainment passed will be edited in the editer
+    public void editEntertainment(Entertainment entertainment) {
+
+        eController.editEntertainment(entertainment);
+
+        entertainmentEditor.setTitle("Entertainment Editer");
+        entertainmentEditor.show();
+    }
+
+    // starts the backend processes
     public void setBackend() {
         backend.start(); // backend setup
         engine.setOriginalList(backend.getRawData()); // SearchEngine setup
     }
 
+    // starts the frontend processes
     public void setFrontend() {
+
+        // put information into modules
         mfController.setModules(backend.getEntertainmentList());
-        // mfController.disableSearch();
+
+        // disabling the search feature
+        mfController.disableSearch();
+
+        // disabling the editing feature
+        disableEditor();
+
+        // put modules in the ui
         mfController.populateModules();
+
+        /*
+         * the method sets up the viewers and editor
+         */
         mfController.setFxmlsAndControllers();
 
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(
-                    getClass().getResource("../../res/fxml/EntertainmentEditor.fxml"));
-            editor = fxmlLoader.load();
-            eController = fxmlLoader.getController();
-            editor.getProperties().put("controller", eController);
-            eController.setApi(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        if (!editorDisabled) {
 
-        editorScene = new Scene(editor);
-        entertainmentEditor = new Stage();
-        entertainmentEditor.setScene(editorScene);
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(
+                        getClass().getResource("../../res/fxml/EntertainmentEditor.fxml"));
+                editor = fxmlLoader.load();
+                eController = fxmlLoader.getController();
+                editor.getProperties().put("controller", eController);
+                eController.setApi(this);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            editorScene = new Scene(editor);
+            entertainmentEditor = new Stage();
+            entertainmentEditor.setScene(editorScene);
+        }
 
     }
 
+    // disables the editor
+    private void disableEditor() {
+        editorDisabled = true;
+    }
+
+    // gets the mainframe controller
     public MainFrameController getMfController() {
         return mfController;
     }
+
+    // Date Format Conversions
 
     /*
      * converts: MMM dd, yyyy
@@ -173,12 +154,15 @@ public class API {
         return convert_format_2_to_format_1(localDate.toString());
     }
 
-    public void editEntertainment(Entertainment entertainment) {
+    // Getters and Setters
 
-        eController.editEntertainment(entertainment);
-
-        entertainmentEditor.setTitle("Entertainment Editer");
-        entertainmentEditor.show();
+    // backend
+    public Backend getBackend() {
+        return backend;
     }
 
+    // search engine
+    public IncrementalSearch getSearchEngine() {
+        return engine;
+    }
 }
