@@ -1,4 +1,4 @@
-# Entertainment Tracker
+# Entertainment Tracker To-Do List
 
 ## List
 
