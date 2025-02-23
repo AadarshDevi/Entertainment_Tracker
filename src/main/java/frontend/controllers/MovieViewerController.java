@@ -141,10 +141,6 @@ public class MovieViewerController {
                     .setText("Release Date: " + api.convert_LocalDate_to_string_date(movie.getDate()));
         }
 
-        // loads CenterLabel
-        // FXMLLoader center_label_loader = new FXMLLoader(
-        // getClass().getResource("../../../res/fxml/CenterLabel.fxml"));
-
         // add production companies
         movie_production_companies.getItems().clear();
 
@@ -164,6 +160,8 @@ public class MovieViewerController {
             }
 
             // add tags
+            movie_tags.getItems().clear();
+
             for (String tag : movie.getTags()) {
                 FXMLLoader center_label_loader = new FXMLLoader(
                         getClass().getResource("../../../res/fxml/CenterLabel.fxml"));
@@ -176,6 +174,11 @@ public class MovieViewerController {
 
         } catch (IOException e) {
         }
+    }
+
+    @FXML
+    public void editEntertainment() {
+        api.getMfController().sendEntertainment(MainFrameController.ENTERTAINMENT_EDITOR, movie);
     }
 
     @FXML

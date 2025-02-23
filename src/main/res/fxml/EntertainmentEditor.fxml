@@ -79,13 +79,13 @@
                         <TextField fx:id="entertainment_duration" prefHeight="31.0" prefWidth="357.0" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="33.0" prefWidth="458.0">
+                  <HBox fx:id="entertainment_season_hbox_module" prefHeight="33.0" prefWidth="458.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="30.0" prefWidth="100.0" text="Season:" />
                         <TextField fx:id="entertainment_season_number" prefHeight="31.0" prefWidth="357.0" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="33.0" prefWidth="458.0">
+                  <HBox fx:id="entertainment_episode_hbox_module" prefHeight="33.0" prefWidth="458.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="30.0" prefWidth="100.0" text="Episode:" />
                         <TextField fx:id="entertainment_episode_number" prefHeight="31.0" prefWidth="357.0" />

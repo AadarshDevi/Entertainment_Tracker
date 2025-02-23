@@ -1,10 +1,17 @@
 package main.java.api;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import main.java.backend.Backend;
 import main.java.backend.SearchEngine.IncrementalSearch;
+import main.java.backend.entertainment.Entertainment;
+import main.java.frontend.controllers.EditorController;
 import main.java.frontend.controllers.MainFrameController;
 
 public class API {
@@ -68,6 +75,12 @@ public class API {
 
     private MainFrameController mfController;
 
+    private AnchorPane editor;
+    private EditorController eController;
+
+    private Stage entertainmentEditor;
+    private Scene editorScene;
+
     public void createBackend() {
         backend = new Backend(this);
         engine = new IncrementalSearch(50);
@@ -95,6 +108,21 @@ public class API {
         // mfController.disableSearch();
         mfController.populateModules();
         mfController.setFxmlsAndControllers();
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    getClass().getResource("../../res/fxml/EntertainmentEditor.fxml"));
+            editor = fxmlLoader.load();
+            eController = fxmlLoader.getController();
+            editor.getProperties().put("controller", eController);
+            eController.setApi(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        editorScene = new Scene(editor);
+        entertainmentEditor = new Stage();
+        entertainmentEditor.setScene(editorScene);
 
     }
 
@@ -143,6 +171,14 @@ public class API {
      */
     public String convert_LocalDate_to_string_date(LocalDate localDate) {
         return convert_format_2_to_format_1(localDate.toString());
+    }
+
+    public void editEntertainment(Entertainment entertainment) {
+
+        eController.editEntertainment(entertainment);
+
+        entertainmentEditor.setTitle("Entertainment Editer");
+        entertainmentEditor.show();
     }
 
 }

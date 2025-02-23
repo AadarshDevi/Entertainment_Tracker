@@ -42,7 +42,7 @@
       </TabPane>
       <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="340.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="entertainment_button_edit" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="57.0" prefWidth="170.0" text="Edit" HBox.hgrow="ALWAYS" />
+            <Button fx:id="entertainment_button_edit" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editEntertainment" prefHeight="57.0" prefWidth="170.0" text="Edit" HBox.hgrow="ALWAYS" />
             <Button fx:id="entertainment_button_copy" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#copyEntertainmentName" prefHeight="57.0" prefWidth="170.0" text="Copy" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>

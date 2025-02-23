@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
@@ -21,12 +22,16 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import main.java.api.API;
 import main.java.backend.entertainment.Anime;
 import main.java.backend.entertainment.Entertainment;
 import main.java.backend.entertainment.Movie;
 
 public class MainFrameController {
+
+    public static final int ENTERTAINMENT_EDITOR = 3;
+    public static final int ENTERTAINMENT_BULK_EDITOR = 4;
 
     @FXML
     private TabPane tabPane;
@@ -82,11 +87,9 @@ public class MainFrameController {
 
     private VBox movieViewer;
     private VBox animeViewer;
-    private AnchorPane editor;
 
     private MovieViewerController mvController;
     private AnimeViewerController avController;
-    private EditorController eController;
 
     @FXML
     private void initialize() {
@@ -217,12 +220,6 @@ public class MainFrameController {
             animeViewer.getProperties().put("controller", avController);
             avController.setApi(api);
 
-            fxmlLoader = new FXMLLoader(getClass().getResource("../../../res/fxml/EntertainmentEditor.fxml"));
-            editor = fxmlLoader.load();
-            eController = fxmlLoader.getController();
-            editor.getProperties().put("controller", eController);
-            eController.setApi(api);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -249,6 +246,7 @@ public class MainFrameController {
 
             // Entertainment Editor
             case 3:
+                api.editEntertainment(entertainment);
                 break;
 
             // Entertainment Bulk Editor

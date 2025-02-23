@@ -149,6 +149,8 @@
 
 - movies can be viewed in the viewer. (but not animes/tv shows)
 
+- movies can be viewed on the editor
+
 ## Removed
 
 - the ability to view animes
@@ -167,21 +169,7 @@
 - Modules in completed, released upcoming and search lists were being invisible
 - when searching modules from other lists were added in it.
 
----
-
-# mmm dd, yyyy
-
----
-
-# mmm dd, yyyy
-
----
-
-# mmm dd, yyyy
-
----
-
-# mmm dd, yyyy
+- checkboxes in status are not being disable based on mouse or action events or even the primary status
 
 ---
 

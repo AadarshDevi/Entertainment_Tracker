@@ -2,31 +2,43 @@
 
 ## List
 
-- [ ] TODO: show anime/tv shows in viewer when module is clicked
+### Anime Addons
+
+- [ ] show anime/tv shows in viewer when module is clicked
 
   > all of the work for this is in mainframe
 
-- [ ] show entertainment in editor when edit button for the entertainment is clicked
+- [ ] create Episodes so i can add miraculous ladybug season 6 eps and release dates, duration and ep number
+- [ ] reenable app to read anime and tv shows
 
-  > it will use the ogSearchModules
+### Entertainment Creator, Editor
+
+- [ ] show entertainment in editor when edit button for the entertainment is clicked
+- TODO: [ ] editing entertainments should use the entertainment list for easy use when bulk editing
+- FIXME: [ ] checkboxes selected/deselected and/or enabled/disabled based on primary and secondary statuses
+
+- [ ] use indexing (module ids) for editing instead of entertainments
+
+  > it will use entertainment from the ogSearchModules (search tab, mainframe)
+
+- [ ] entertainment editor's slider needs 3 new buttons:
+
+  > [ ] Slider UI Format >> to first (<<) | back (<) | field | search (search icon) | next (>) | last (>>)
+
+### Data Writing and Formating
 
 - [ ] toString will be int the data format (see data.txt)
 - [ ] make the writeData method to write the data back to data.txt
 - [ ] make app take data backups.
+- [ ] create file to store settings information and read it after app is set up
 
   > for writing data to data.txt
 
-- [ ] make code module (again 2nd time)
+### Other
 
+- [ ] make code modular (again 2nd time)
 - [ ] convert project into an .exe using Launch4J
-
-- [ ] create Episodes so i can add miraculous ladybug season 6 eps and release dates, duration and ep number
-
   > can be viewed like the tags
-
-- [ ] create file to store settings information and read it after app is set up
-
-- [ ] reenable app to read anime and tv shows
 
 ## Completed
 

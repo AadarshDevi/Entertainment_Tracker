@@ -1,12 +1,14 @@
 package main.java.frontend.controllers;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import main.java.api.API;
 import main.java.backend.entertainment.Anime;
 import main.java.backend.entertainment.Entertainment;
@@ -52,6 +54,13 @@ public class EditorController {
     private TextArea entertainment_production_companies;
     @FXML
     private TextArea entertainment_tags;
+
+    @FXML
+    private HBox entertainment_season_hbox_module;
+    @FXML
+    private HBox entertainment_episode_hbox_module;
+
+    private ArrayList<Entertainment> entertainmentList;
 
     private API api;
 
@@ -111,6 +120,10 @@ public class EditorController {
 
     public void editEntertainment(Entertainment entertainment) {
 
+        if (entertainment.getType().equals(Entertainment.MOVIE)) {
+            setMovie((Movie) entertainment);
+        }
+
     }
 
     public void bulkEditEntertainment(Entertainment[] entertainments) {
@@ -118,4 +131,114 @@ public class EditorController {
         // Entertainment[] bulkList = new Entertainment[entertainments.length];
 
     }
+
+    private void setMovie(Movie movie) {
+
+        // disable season and episode fields
+        entertainment_season_hbox_module.setDisable(true);
+        entertainment_season_hbox_module.setVisible(false);
+
+        entertainment_episode_hbox_module.setDisable(true);
+        entertainment_episode_hbox_module.setVisible(false);
+
+        // basic info
+        entertainment_type.setText("Movie");
+        entertainment_franchise.setText(movie.getFranchise());
+        entertainment_title.setText(movie.getTitle());
+
+        switch (movie.getPrimaryStatus()) {
+            case 1:
+                entertainment_status_1.setSelected(true);
+                break;
+
+            case 2:
+                entertainment_status_2.setSelected(true);
+                break;
+
+            case 3:
+                entertainment_status_3.setSelected(true);
+                break;
+
+            default:
+                break;
+        }
+
+        // status (primary and secondary)
+        viewStatus(movie);
+
+        // production companies
+        String[] production_companies = entertainment_production_companies.getText().split("\n");
+        String op_prod_comp = "";
+        for (String string : production_companies) {
+            op_prod_comp += string + "\n";
+        }
+        entertainment_production_companies.setText(op_prod_comp);
+
+        // tags
+        String[] tags = entertainment_tags.getText().split("\n");
+        String op_tags = "";
+        for (String string : tags) {
+            op_tags += string + "\n";
+        }
+        entertainment_tags.setText(op_tags);
+
+        // duration and release date
+        entertainment_duration.setText(movie.getDuration() + "");
+        entertainment_release_date.setText(movie.getDate() + "");
+    }
+
+    // TODO: add animes/tv shows
+    // private void setAnime(Anime anime) {
+    // }
+
+    @FXML
+    private void viewStatus(Entertainment entertainment) {
+
+        // completed
+        if (entertainment_status_1.isSelected()) {
+            entertainment_status_2.setSelected(false);
+            entertainment_status_3.setSelected(false);
+            entertainment_status_2.setDisable(true);
+            entertainment_status_3.setDisable(true);
+        } else {
+            entertainment_status_2.setSelected(false);
+            entertainment_status_3.setSelected(false);
+            entertainment_status_2.setDisable(false);
+            entertainment_status_3.setDisable(false);
+        }
+
+        // released
+        if (entertainment_status_2.isSelected()) {
+            entertainment_status_1.setSelected(false);
+            entertainment_status_3.setSelected(false);
+            entertainment_status_1.setDisable(true);
+            entertainment_status_3.setDisable(true);
+        } else {
+            entertainment_status_1.setSelected(false);
+            entertainment_status_3.setSelected(false);
+            entertainment_status_1.setDisable(false);
+            entertainment_status_3.setDisable(false);
+        }
+
+        // upcoming
+        if (entertainment_status_3.isSelected()) {
+            entertainment_status_2.setSelected(false);
+            entertainment_status_1.setSelected(false);
+            entertainment_status_2.setDisable(true);
+            entertainment_status_1.setDisable(true);
+        } else {
+            entertainment_status_2.setSelected(false);
+            entertainment_status_1.setSelected(false);
+            entertainment_status_2.setDisable(false);
+            entertainment_status_1.setDisable(false);
+        }
+
+        // special
+        // pilot
+    }
+
+    public void setEntertainmentList(ArrayList<Entertainment> entertainmentList) {
+        this.entertainmentList = entertainmentList;
+    }
+
 }
