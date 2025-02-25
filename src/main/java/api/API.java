@@ -199,5 +199,10 @@ public class API {
         return viewerDisabled;
     }
 
+    public void getEditorSize() {
+        logger.debug(this, editor.getWidth() + " :: " +
+                editor.getHeight());
+    }
+
     // new method
 }

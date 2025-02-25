@@ -22,32 +22,49 @@
             <VBox prefHeight="544.0" prefWidth="468.0" spacing="7.5">
                <children>
                   <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="448.0">
-                     <left>
-                        <Button fx:id="button_previous" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="60.0" style="-fx-background-radius: 30 0 0 30;" text="&lt;" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets />
-                           </BorderPane.margin>
-                           <font>
-                              <Font name="SansSerif Bold" size="20.0" />
-                           </font>
-                        </Button>
-                     </left>
-                     <right>
-                        <Button fx:id="button_next" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="60.0" style="-fx-background-radius: 0 30 30 0;" text="&gt;" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets />
-                           </BorderPane.margin>
-                           <font>
-                              <Font name="SansSerif Bold" size="20.0" />
-                           </font>
-                        </Button>
-                     </right>
                      <center>
-                        <TextField fx:id="module_id" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="190.0" style="-fx-background-radius: 0;" BorderPane.alignment="CENTER" />
+                        <TextField fx:id="module_id" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="233.0" style="-fx-background-radius: 0;" BorderPane.alignment="CENTER" />
                      </center>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="4.0" />
                      </padding>
+                     <left>
+                        <HBox prefHeight="35.0" prefWidth="61.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="to_first_button" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="49.0" style="-fx-background-radius: 30 0 0 30;" text="&lt;&lt;">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="previous_button" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 0 0 0 0;" text="&lt;">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </left>
+                     <right>
+                        <HBox prefHeight="35.0" prefWidth="89.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="search_button" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#getEditorSize" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 0 0 0 0;">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="next_button" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 0 0 0 0;" text="&gt;">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="to_last_button" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="49.0" style="-fx-background-radius: 0 30 30 0;" text="&gt;&gt;">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </right>
                   </BorderPane>
                   <HBox prefHeight="33.0" prefWidth="458.0">
                      <children>
@@ -117,6 +134,7 @@
                         <CheckBox fx:id="entertainment_status_5" mnemonicParsing="false" onAction="#checkSecondaryStatus" prefHeight="54.0" prefWidth="224.0" text="Pilot" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
+                  <Button fx:id="save_button" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Save" />
                </children>
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" top="10.0" />

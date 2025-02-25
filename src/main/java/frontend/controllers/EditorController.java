@@ -128,7 +128,9 @@ public class EditorController {
 
         int entertainmentIndex = findEntertainment(entertainment);
 
-        if (entertainmentIndex > 0) {
+        logger.debug(this, entertainmentIndex + "");
+
+        if (entertainmentIndex >= 0) {
             logger.log(this, "Entertainment found");
 
             if (entertainment.getType().equals(Entertainment.MOVIE)) {
@@ -331,6 +333,10 @@ public class EditorController {
 
     public void setEntertainmentList(ArrayList<Entertainment> entertainmentList) {
         this.entertainmentList = entertainmentList;
+    }
+
+    public void getEditorSize() {
+        api.getEditorSize();
     }
 
 }

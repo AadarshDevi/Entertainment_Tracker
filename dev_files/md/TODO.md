@@ -13,9 +13,11 @@
 
 ### Entertainment Creator, Editor
 
-- [ ] entertainment editor's slider needs 3 new buttons:
+- [x] entertainment editor's slider needs 3 new buttons:
 
-  > [ ] Slider UI Format >> to first (<<) | back (<) | field | search (search icon) | next (>) | last (>>)
+  > [x] Slider UI Format >> to first (<<) | back (<) | field | search (search icon) | next (>) | last (>>)
+
+- [x] add save button
 
 ### Data Writing and Formating
 

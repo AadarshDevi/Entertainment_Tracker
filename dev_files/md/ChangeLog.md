@@ -1,5 +1,24 @@
 # Entertainment Tracker Change Log
 
+## Feb 25, 2025
+
+### Added
+
+- placeholder
+
+### Changed / Updated
+
+- updated editor fxml by adding the 3 three more slider buttons and adding a save button.
+
+### Problems
+
+- placeholder
+
+### Fixed
+
+- the first element of the list is now editab;e.
+  > some small logical error accumilated into a big error. logical error when checking indexing.
+
 ## Feb 24, 2025
 
 ### Added
