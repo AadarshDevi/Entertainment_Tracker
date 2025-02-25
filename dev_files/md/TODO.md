@@ -13,14 +13,6 @@
 
 ### Entertainment Creator, Editor
 
-- [ ] show entertainment in editor when edit button for the entertainment is clicked
-- TODO: [ ] editing entertainments should use the entertainment list for easy use when bulk editing
-- FIXME: [ ] checkboxes selected/deselected and/or enabled/disabled based on primary and secondary statuses
-
-- [ ] use indexing (module ids) for editing instead of entertainments
-
-  > it will use entertainment from the ogSearchModules (search tab, mainframe)
-
 - [ ] entertainment editor's slider needs 3 new buttons:
 
   > [ ] Slider UI Format >> to first (<<) | back (<) | field | search (search icon) | next (>) | last (>>)
@@ -36,11 +28,43 @@
 
 ### Other
 
-- [ ] make code modular (again 2nd time)
+- [ ] make code modular
+  > rewrite the viewing sequence
 - [ ] convert project into an .exe using Launch4J
-  > can be viewed like the tags
+<!-- > can be viewed like the tags -->
 
 ## Completed
+
+### Feb 24, 2025
+
+- [x] show entertainment in editor when edit button for the entertainment is clicked
+- [x] editing entertainments should use the entertainment list for easy use when bulk editing
+- [x] checkboxes selected/deselected and/or enabled/disabled based on primary and secondary statuses
+
+- [x] use indexing (module ids) for editing instead of entertainments
+
+  > it will use entertainment from the ogSearchModules (search tab, mainframe)
+
+### Feb 22, 2025
+
+- [x] write new search algorithm
+- [x] integrate new search algorithm in app
+
+- [x] when searching, make the search tab active.
+
+  > if i am on completed, etc tab and search "text", it should go to search tab and show the results
+
+- [x] show movies in viewer when module is clicked
+  > all of the work for this is in mainframe
+
+### Jan 15, 2025
+
+- [x] write the toString for the entertainments
+
+- [x] duplicate modules and put it in search tab
+- [x] Make module send the tags and production companies so viewer can view them.
+- [x] set viewers and editor's fxml and controllers
+- [x] make the ui for editing a movie, anime
 
 ### Jan 03, 2025 - Jan 13, 2025
 
@@ -60,24 +84,3 @@
 
   - [x] add movie viewer to the app.
   - [x] add anime viewer to the app.
-
-### Jan 15, 2025
-
-- [x] write the toString for the entertainments
-
-- [x] duplicate modules and put it in search tab
-- [x] Make module send the tags and production companies so viewer can view them.
-- [x] set viewers and editor's fxml and controllers
-- [x] make the ui for editing a movie, anime
-
-### Feb 22, 2025
-
-- [x] write new search algorithm
-- [x] integrate new search algorithm in app
-
-- [x] when searching, make the search tab active.
-
-  > if i am on completed, etc tab and search "text", it should go to search tab and show the results
-
-- [x] show movies in viewer when module is clicked
-  > all of the work for this is in mainframe

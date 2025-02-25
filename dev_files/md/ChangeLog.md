@@ -4,23 +4,35 @@
 
 ### Added
 
-- placeholder
+- Readme: beta testing phases
+- created viewing entertainment sequence
+- viewer and editor disablers created
+- booleans for entertainment created
+- methods created for dynamic checkbox input
 
-### Removed
+### Changed / Updated
 
-- placeholder
+- updated vocabulary
+- logger can be accessed by more classes
+- logger class updated
+- editor uses index to find entertainment and compare them to find the correct entertainment
+- exception handling improved
+- editor, bulk editor and creator removed from being checked using the same methods.
 
-### Changed
+  > to send information through editor and viewers the same method was used. now the viewers and editors are in seperate processes.
 
-- placeholder
+- editor fxml updated for current project use
 
 ### Problems
 
-- placeholder
+- the first item in the entertainment list is not being found
+  > entertainment not found dialog > entertainment not found: the first item in list
 
 ### Fixed
 
-- placeholder
+- checkboxes in editor are dynamically changing based on user input
+- entertainment viewing in editor is completely finished
+  > preiviously the animation companies, statuses and tags were not being properly put in the ui elements
 
 ## Feb 22, 2025 >> Version 3.1.A.1.2.0
 
