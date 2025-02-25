@@ -24,6 +24,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.java.api.API;
+import main.java.api.Logger.ConsoleLog;
+import main.java.api.Logger.ConsoleLogFactory;
 import main.java.backend.entertainment.Anime;
 import main.java.backend.entertainment.Entertainment;
 import main.java.backend.entertainment.Movie;
@@ -91,6 +93,10 @@ public class MainFrameController {
     private MovieViewerController mvController;
     private AnimeViewerController avController;
 
+    // private int searchID;
+
+    ConsoleLog logger = ConsoleLogFactory.getLogger();
+
     @FXML
     private void initialize() {
 
@@ -98,8 +104,11 @@ public class MainFrameController {
             // Get current text BEFORE processing event
             String currentText = search_field.getText();
             if (event.getCode() == KeyCode.ENTER) {
-                System.out.println("\n\nActual Text: '" + currentText + "'");
-                System.out.println(">>> Search Text: '" + currentText + "'");
+                // System.out.println("\n\nActual Text: '" + currentText + "'");
+                // System.out.println(">>> Search Text: '" + currentText + "'");
+
+                logger.log(this, "Search Text: '" + currentText + "'");
+
                 searchResults = api.getSearchEngine().simpleSearch(currentText);
 
                 searchController();
@@ -229,35 +238,51 @@ public class MainFrameController {
         switch (placeID) {
             // MovieViewer
             case 1:
-                information_viewer_stand_in.getChildren().clear();
 
-                mvController.setSize(
-                        information_viewer_stand_in.getWidth(),
-                        information_viewer_stand_in.getHeight());
+                if (!api.isViewerDisabled()) {
 
-                information_viewer_stand_in.getChildren().add(movieViewer);
-                mvController.view((Movie) entertainment);
+                    information_viewer_stand_in.getChildren().clear();
+
+                    mvController.setSize(
+                            information_viewer_stand_in.getWidth(),
+                            information_viewer_stand_in.getHeight());
+
+                    information_viewer_stand_in.getChildren().add(movieViewer);
+                    mvController.view((Movie) entertainment);
+                } else {
+                    logger.log(this, "Viewer Disabled");
+                }
                 break;
 
             // AnimeViewer
             case 2:
-                avController.view((Anime) entertainment);
+                if (!api.isViewerDisabled()) {
+                    avController.view((Anime) entertainment);
+                } else {
+                    logger.log(this, "Viewer Disabled");
+                }
                 break;
-
-            // Entertainment Editor
-            case 3:
-                api.editEntertainment(entertainment);
-                break;
-
-            // Entertainment Bulk Editor
-            case 4:
-                break;
-
-            // Entertainment Creator
-            case 5:
-                break;
-
+            /*
+             * // Entertainment Editor
+             * case 3:
+             * if (!api.isEditorDisabled()) {
+             * logger.log(this, "Entered Editor");
+             * // api.editEntertainment(moduleID);
+             * } else {
+             * logger.log(this, "Editor Disabled");
+             * }
+             * break;
+             * 
+             * // Entertainment Bulk Editor
+             * case 4:
+             * break;
+             * 
+             * // Entertainment Creator
+             * case 5:
+             * break;
+             */
             default:
+                logger.error(this, new Exception("placeID does not exist"));
         }
     }
 
@@ -265,6 +290,8 @@ public class MainFrameController {
         search_tab.setDisable(true);
         search_field.setDisable(true);
         search_button.setDisable(true);
+
+        logger.log(this, "Search Disabled");
     }
 
     @FXML
@@ -308,8 +335,8 @@ public class MainFrameController {
 
             if (moduleID == searchID) {
                 moduleIdArray++;
-                System.out.println(
-                        "Module ID: " + moduleID + " :: Franchise: " +
+                logger.log(this,
+                        "ID: " + moduleID + " : Franchise: " +
                                 mController.getEntertainment().getFranchise());
 
             } else {
@@ -321,15 +348,15 @@ public class MainFrameController {
         duplicateSearchList.removeAll(removedModules);
         list_search.getItems().addAll(duplicateSearchList);
 
-        System.out.println(
-                "duplicateSearchList Length: " + duplicateSearchList.size() +
-                        " :: duplicateSearchList Length: " + searchResults.size());
+        // System.out.println(
+        // "duplicateSearchList Length: " + duplicateSearchList.size() +
+        // " :: searchResults Length: " + searchResults.size());
 
         if (duplicateSearchList.size() <= 0) {
             JOptionPane.showMessageDialog(null,
                     "Your search \"" + search_field.getText() + "\" was not found in the database",
                     "Search Not Found",
-                    JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.ERROR_MESSAGE);
             resetSearchListView();
         }
 
@@ -351,5 +378,9 @@ public class MainFrameController {
     @FXML
     private void application_quit() {
         System.exit(0);
+    }
+
+    public void editEntertainment(Entertainment entertainment) {
+        api.editEntertainment(entertainment);
     }
 }

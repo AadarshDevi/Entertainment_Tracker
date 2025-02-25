@@ -43,7 +43,7 @@
                         </Button>
                      </right>
                      <center>
-                        <TextField fx:id="module_id" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="190.0" style="-fx-background-radius: 0;" BorderPane.alignment="CENTER" />
+                        <TextField fx:id="module_id" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="190.0" style="-fx-background-radius: 0;" BorderPane.alignment="CENTER" />
                      </center>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="4.0" />
@@ -110,11 +110,11 @@
                       <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <CheckBox fx:id="entertainment_status_1" mnemonicParsing="false" prefHeight="54.0" prefWidth="224.0" text="Completed" />
-                        <CheckBox fx:id="entertainment_status_2" mnemonicParsing="false" prefHeight="54.0" prefWidth="224.0" text="Released" GridPane.columnIndex="1" />
-                        <CheckBox fx:id="entertainment_status_3" mnemonicParsing="false" prefHeight="54.0" prefWidth="243.0" text="Upcoming" GridPane.rowIndex="1" />
-                        <CheckBox fx:id="entertainment_status_4" mnemonicParsing="false" prefHeight="54.0" prefWidth="243.0" text="Special" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <CheckBox fx:id="entertainment_status_5" mnemonicParsing="false" prefHeight="54.0" prefWidth="224.0" text="Pilot" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="entertainment_status_1" mnemonicParsing="false" onAction="#checkPrimaryStatus" prefHeight="54.0" prefWidth="224.0" text="Completed" />
+                        <CheckBox fx:id="entertainment_status_2" mnemonicParsing="false" onAction="#checkPrimaryStatus" prefHeight="54.0" prefWidth="224.0" text="Released" GridPane.columnIndex="1" />
+                        <CheckBox fx:id="entertainment_status_3" mnemonicParsing="false" onAction="#checkPrimaryStatus" prefHeight="54.0" prefWidth="243.0" text="Upcoming" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="entertainment_status_4" mnemonicParsing="false" onAction="#checkSecondaryStatus" prefHeight="54.0" prefWidth="243.0" text="Special" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="entertainment_status_5" mnemonicParsing="false" onAction="#checkSecondaryStatus" prefHeight="54.0" prefWidth="224.0" text="Pilot" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>

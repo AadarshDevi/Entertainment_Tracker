@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.java.api.Logger.ConsoleLog;
+import main.java.api.Logger.ConsoleLogFactory;
 import main.java.backend.Backend;
 import main.java.backend.SearchEngine.IncrementalSearch;
 import main.java.backend.entertainment.Entertainment;
@@ -28,9 +30,13 @@ public class API {
     private Scene editorScene;
 
     private boolean editorDisabled;
+    private boolean viewerDisabled;
+
+    private ConsoleLog logger;
 
     // Basic Constructor
     public API() {
+        logger = ConsoleLogFactory.getLogger();
     }
 
     // creates the backend and search engine
@@ -47,10 +53,15 @@ public class API {
     // the entertainment passed will be edited in the editer
     public void editEntertainment(Entertainment entertainment) {
 
-        eController.editEntertainment(entertainment);
+        try {
+            eController.editEntertainment(entertainment);
+            entertainmentEditor.setTitle("Entertainment Editer");
+            entertainmentEditor.show();
+        } catch (Exception e) {
+            entertainmentEditor.hide();
+            logger.log(this, "Editor not opened");
+        }
 
-        entertainmentEditor.setTitle("Entertainment Editer");
-        entertainmentEditor.show();
     }
 
     // starts the backend processes
@@ -65,11 +76,14 @@ public class API {
         // put information into modules
         mfController.setModules(backend.getEntertainmentList());
 
+        // disabling the viewer feature
+        // disableViewer();
+
         // disabling the search feature
-        mfController.disableSearch();
+        // mfController.disableSearch();
 
         // disabling the editing feature
-        disableEditor();
+        // disableEditor();
 
         // put modules in the ui
         mfController.populateModules();
@@ -81,6 +95,8 @@ public class API {
 
         if (!editorDisabled) {
 
+            logger.log(this, "Editor Ready");
+
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(
                         getClass().getResource("../../res/fxml/EntertainmentEditor.fxml"));
@@ -88,6 +104,7 @@ public class API {
                 eController = fxmlLoader.getController();
                 editor.getProperties().put("controller", eController);
                 eController.setApi(this);
+                eController.setEntertainmentList(getBackend().getEntertainmentList());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -95,11 +112,19 @@ public class API {
             editorScene = new Scene(editor);
             entertainmentEditor = new Stage();
             entertainmentEditor.setScene(editorScene);
+        } else {
+            logger.log(this, "Editor Disabled");
         }
 
     }
 
+    @SuppressWarnings("unused")
+    private void disableViewer() {
+        viewerDisabled = true;
+    }
+
     // disables the editor
+    @SuppressWarnings("unused")
     private void disableEditor() {
         editorDisabled = true;
     }
@@ -165,4 +190,14 @@ public class API {
     public IncrementalSearch getSearchEngine() {
         return engine;
     }
+
+    public boolean isEditorDisabled() {
+        return editorDisabled;
+    }
+
+    public boolean isViewerDisabled() {
+        return viewerDisabled;
+    }
+
+    // new method
 }

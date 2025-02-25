@@ -122,10 +122,14 @@ public class ModuleController {
     @FXML
     public void onClicked() {
 
-        logger.log(this, ("Module clicked: " + entertainment.getFranchise()));
-
-        int placeID = (entertainment.getType().equals("Movie")) ? 1 : 2;
-        api.getMfController().sendEntertainment(placeID, entertainment);
+        if (!api.isViewerDisabled()) {
+            logger.log(this, ("Module clicked: " + entertainment.getFranchise()));
+            int placeID = (entertainment.getType().equals("Movie")) ? 1 : 2;
+            // api.getMfController().sendEntertainmentSearchID(this.getId());
+            api.getMfController().sendEntertainment(placeID, entertainment);
+        } else {
+            logger.log(this, "Viewer Disabled");
+        }
     }
 
 }

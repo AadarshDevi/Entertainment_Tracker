@@ -13,12 +13,18 @@
 - Minor Version: 1
 - Patch Version: 5
 
+---
+
+- A: Alpha
+- B: Beta
+- R: Release
+
 ## Project Description
 
 - Author: Aadarsh Devi
 
 - Description:
-  > Movies, TV shows and other types of entertainments can be put in the app to keep track of them.
+  > Movies ~~and tv shows~~ can be put in the app to keep track of them.
 
 ## Status
 
@@ -48,3 +54,125 @@
 - [_] add movies and tv shows
 - [_] edit entertainment
 - [_] bulk edit entertainment
+
+## Testing Phases
+
+### Test 1
+
+- ui opening test
+
+- disabled:
+  - reading info
+  - displaying info
+  - viewer
+  - search
+  - editor
+  - save file
+
+### Test 2
+
+- ui opening test
+- reading info
+- displaying info
+
+- disabled:
+  - viewer
+  - search
+  - editor
+  - save file
+
+### Test 3
+
+- ui opening test
+- reading info
+- displaying info
+- viewer
+
+- disabled:
+  - search
+  - editor
+  - save file
+
+### Test 4
+
+- ui opening test
+- reading info
+- displaying info
+- viewer
+- search
+
+- disabled:
+  - editor
+  - save file
+
+### Test 5
+
+- ui opening test
+- reading info
+- displaying info
+- viewer
+- search
+- editor
+
+- disabled:
+  - bulk editor
+  - save file
+
+### Test 6
+
+- ui opening test
+- reading info
+- displaying info
+- viewer
+- search
+- editor
+- bulk editor
+
+- disabled:
+  - creator
+  - save file
+
+### Test 7
+
+- mainframe ui test (fxml)
+- reading info
+- displaying info
+- viewer
+- search
+- editor
+- bulk editor
+- creator
+
+- disabled:
+  - save file
+  - settings file
+
+### Test 8
+
+- mainframe ui test (fxml)
+- reading info
+- displaying info
+- viewer
+- search
+- editor
+- bulk editor
+- creator
+- save file
+
+- disabled:
+  - settings file
+
+### Test 9
+
+- mainframe ui test (fxml)
+- reading info
+- displaying info
+- viewer
+- search
+- editor
+- bulk editor
+- creator
+- save file
+- settings file
+
+- disabled: none

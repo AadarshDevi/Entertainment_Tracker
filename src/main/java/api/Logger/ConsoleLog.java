@@ -9,12 +9,12 @@ public class ConsoleLog implements LoggingInterface {
 
     @Override
     public void error(Object object, Exception e) {
-        System.out.println("[ERROR : " + object.getClass() + "] >>> >>> " + e.getMessage());
+        System.out.println("\n\n[EXCEPTION : " + object.getClass() + "] >>> >>> " + e.getMessage() + "\n");
     }
 
     @Override
     public void debug(Object object, String string) {
-        System.out.println("\n[DEBUG : " + object.getClass() + "] >>>>>> " + string + "\n");
+        System.out.println("[DEBUG : " + object.getClass() + "] >>> " + string);
     }
 
 }

@@ -28,6 +28,8 @@ public class Entertainment {
         setStatus();
     }
 
+    // @Override
+
     private void setStatus() {
         primaryStatus = Integer.parseInt(getStatuses()[0]);
 
@@ -97,6 +99,55 @@ public class Entertainment {
 
     public void setSecondaryStatus(int secondaryStatus) {
         this.secondaryStatus = secondaryStatus;
+    }
+
+    // booleans
+
+    public boolean equals(Entertainment inEntertainment) {
+
+        return sameTags(inEntertainment.getTags()) &&
+                inEntertainment.getType().equals(type) &&
+                inEntertainment.getFranchise().equals(franchise) &&
+                inEntertainment.getTitle().equals(title) &&
+                inEntertainment.getPrimaryStatus() == primaryStatus &&
+                inEntertainment.getSecondaryStatus() == secondaryStatus &&
+                inEntertainment.getDate().equals(date);
+
+    }
+
+    private boolean sameTags(String[] inTags) {
+
+        boolean isTagsSame = true;
+        if (this.tags.length != inTags.length) {
+            return false;
+        }
+
+        for (int i = 0; i < tags.length; i++) {
+            if (!this.tags[i].equals(inTags[i])) {
+                isTagsSame = false;
+            }
+        }
+        return isTagsSame;
+    }
+
+    public boolean isDateEqual(Entertainment entertainment) {
+        return this.date.isEqual(entertainment.getDate());
+    }
+
+    public boolean isFranchiseEqual(Entertainment entertainment) {
+        return this.franchise.equals(entertainment.getFranchise());
+    }
+
+    public boolean isPrimaryStatusEqual(Entertainment entertainment) {
+        return this.primaryStatus == entertainment.getPrimaryStatus();
+    }
+
+    public boolean isTitleEqual(Entertainment entertainment) {
+        return this.title.equals(entertainment.getTitle());
+    }
+
+    public boolean isTypeEqual(Entertainment entertainment) {
+        return this.type.equals(entertainment.getType());
     }
 
 }

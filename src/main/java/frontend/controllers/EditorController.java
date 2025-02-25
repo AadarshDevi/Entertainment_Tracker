@@ -3,6 +3,8 @@ package main.java.frontend.controllers;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -10,6 +12,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import main.java.api.API;
+import main.java.api.Logger.ConsoleLog;
+import main.java.api.Logger.ConsoleLogFactory;
 import main.java.backend.entertainment.Anime;
 import main.java.backend.entertainment.Entertainment;
 import main.java.backend.entertainment.Movie;
@@ -64,8 +68,11 @@ public class EditorController {
 
     private API api;
 
+    private ConsoleLog logger;
+
     public void setApi(API api) {
         this.api = api;
+        logger = ConsoleLogFactory.getLogger();
     }
 
     public Entertainment addEntertainment() {
@@ -115,15 +122,45 @@ public class EditorController {
     }
 
     public void bulkAddEntertainment() {
+    }
+
+    public void editEntertainment(Entertainment entertainment) throws Exception {
+
+        int entertainmentIndex = findEntertainment(entertainment);
+
+        if (entertainmentIndex > 0) {
+            logger.log(this, "Entertainment found");
+
+            if (entertainment.getType().equals(Entertainment.MOVIE)) {
+
+                module_id.setText((entertainmentIndex + 1) + "");
+                setMovie((Movie) entertainment);
+
+                // TODO: Add anime
+            } else {
+                logger.error(this, new Exception("Entertainment Type not found"));
+            }
+
+        } else {
+            logger.error(this, new Exception("Entertainment not found: " + entertainment.getFranchise()));
+            JOptionPane.showMessageDialog(null,
+                    "Entertainment not found: " + entertainment.getFranchise(),
+                    "Entertainment Not Found",
+                    JOptionPane.ERROR_MESSAGE);
+            throw new Exception("Entertainment Not Found");
+        }
 
     }
 
-    public void editEntertainment(Entertainment entertainment) {
+    private int findEntertainment(Entertainment searchEntertainment) {
 
-        if (entertainment.getType().equals(Entertainment.MOVIE)) {
-            setMovie((Movie) entertainment);
+        int finalI = -1;
+        for (int i = 0; i < entertainmentList.size(); i++) {
+            if (searchEntertainment.equals(entertainmentList.get(i))) {
+                finalI = i;
+            }
         }
-
+        return finalI;
     }
 
     public void bulkEditEntertainment(Entertainment[] entertainments) {
@@ -164,20 +201,63 @@ public class EditorController {
         }
 
         // status (primary and secondary)
-        viewStatus(movie);
+        switch (movie.getPrimaryStatus()) {
+            case 1:
+                entertainment_status_1.setSelected(true);
+                entertainment_status_2.setSelected(false);
+                entertainment_status_3.setSelected(false);
+                break;
+
+            case 2:
+                entertainment_status_2.setSelected(true);
+                entertainment_status_3.setSelected(false);
+                entertainment_status_1.setSelected(false);
+                break;
+
+            case 3:
+                entertainment_status_3.setSelected(true);
+                entertainment_status_1.setSelected(false);
+                entertainment_status_2.setSelected(false);
+                break;
+
+            default:
+                entertainment_status_3.setSelected(false);
+                entertainment_status_1.setSelected(false);
+                entertainment_status_2.setSelected(false);
+        }
+
+        // check secondary status
+        switch (movie.getPrimaryStatus()) {
+            case 4:
+                entertainment_status_4.setSelected(true);
+                entertainment_status_5.setSelected(false);
+                break;
+
+            case 5:
+                entertainment_status_4.setSelected(false);
+                entertainment_status_5.setSelected(true);
+                break;
+
+            default:
+                entertainment_status_4.setSelected(false);
+                entertainment_status_5.setSelected(false);
+        }
+
+        // disables unwanted checkboxes
+        checkPrimaryStatus();
+        checkSecondaryStatus();
 
         // production companies
-        String[] production_companies = entertainment_production_companies.getText().split("\n");
         String op_prod_comp = "";
-        for (String string : production_companies) {
+        for (String string : movie.getAnimationCompanies()) {
             op_prod_comp += string + "\n";
         }
+        // logger.debug(this, op_prod_comp);
         entertainment_production_companies.setText(op_prod_comp);
 
         // tags
-        String[] tags = entertainment_tags.getText().split("\n");
         String op_tags = "";
-        for (String string : tags) {
+        for (String string : movie.getTags()) {
             op_tags += string + "\n";
         }
         entertainment_tags.setText(op_tags);
@@ -188,53 +268,65 @@ public class EditorController {
     }
 
     // TODO: add animes/tv shows
-    // private void setAnime(Anime anime) {
-    // }
+    private void setAnime(Anime anime) {
+    }
 
     @FXML
-    private void viewStatus(Entertainment entertainment) {
+    public void checkPrimaryStatus() {
+        // logger.debug(this, "Checking Primary Status Checkboxes");
 
-        // completed
         if (entertainment_status_1.isSelected()) {
-            entertainment_status_2.setSelected(false);
-            entertainment_status_3.setSelected(false);
             entertainment_status_2.setDisable(true);
             entertainment_status_3.setDisable(true);
-        } else {
+
             entertainment_status_2.setSelected(false);
             entertainment_status_3.setSelected(false);
-            entertainment_status_2.setDisable(false);
-            entertainment_status_3.setDisable(false);
-        }
 
-        // released
-        if (entertainment_status_2.isSelected()) {
-            entertainment_status_1.setSelected(false);
-            entertainment_status_3.setSelected(false);
+        } else if (entertainment_status_2.isSelected()) {
             entertainment_status_1.setDisable(true);
             entertainment_status_3.setDisable(true);
-        } else {
+
             entertainment_status_1.setSelected(false);
             entertainment_status_3.setSelected(false);
-            entertainment_status_1.setDisable(false);
-            entertainment_status_3.setDisable(false);
-        }
 
-        // upcoming
-        if (entertainment_status_3.isSelected()) {
-            entertainment_status_2.setSelected(false);
-            entertainment_status_1.setSelected(false);
-            entertainment_status_2.setDisable(true);
+        } else if (entertainment_status_3.isSelected()) {
             entertainment_status_1.setDisable(true);
-        } else {
-            entertainment_status_2.setSelected(false);
+            entertainment_status_2.setDisable(true);
+
             entertainment_status_1.setSelected(false);
-            entertainment_status_2.setDisable(false);
+            entertainment_status_2.setSelected(false);
+        } else {
             entertainment_status_1.setDisable(false);
+            entertainment_status_2.setDisable(false);
+            entertainment_status_3.setDisable(false);
+
+            entertainment_status_1.setSelected(false);
+            entertainment_status_2.setSelected(false);
+            entertainment_status_3.setSelected(false);
         }
 
-        // special
-        // pilot
+    }
+
+    @FXML
+    public void checkSecondaryStatus() {
+        // logger.debug(this, "Checking Secondary Status Checkboxes");
+
+        if (entertainment_status_4.isSelected()) {
+            entertainment_status_5.setDisable(true);
+            entertainment_status_5.setSelected(false);
+
+        } else if (entertainment_status_5.isSelected()) {
+            entertainment_status_4.setDisable(true);
+            entertainment_status_4.setSelected(false);
+
+        } else {
+            entertainment_status_4.setDisable(false);
+            entertainment_status_5.setDisable(false);
+
+            entertainment_status_4.setSelected(false);
+            entertainment_status_5.setSelected(false);
+        }
+
     }
 
     public void setEntertainmentList(ArrayList<Entertainment> entertainmentList) {

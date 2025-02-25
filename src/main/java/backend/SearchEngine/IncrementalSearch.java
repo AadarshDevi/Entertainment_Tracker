@@ -2,10 +2,15 @@ package main.java.backend.SearchEngine;
 
 import java.util.ArrayList;
 
+import main.java.api.Logger.ConsoleLog;
+import main.java.api.Logger.ConsoleLogFactory;
+
 public class IncrementalSearch {
 
     private ArrayList<String> originalList;
     private ArrayList<String> currentSearchList;
+
+    private ConsoleLog logger = ConsoleLogFactory.getLogger();
 
     // private SearchHistory searchHistory;
     private StringBuilder searchBuilder;
@@ -40,7 +45,8 @@ public class IncrementalSearch {
         for (String string : originalList) {
             if (string.toLowerCase().contains(phrase.toLowerCase())) {
                 searchIndexes.add(i);
-                System.out.println("Index: " + i + " :: String: " + string.substring(9, 25));
+                // System.out.println("Index: " + i + " :: String: " + string.substring(9, 25));
+                logger.log(this, "Index: " + i + " :: String: " + string.substring(9, 25));
             }
             i++;
         }

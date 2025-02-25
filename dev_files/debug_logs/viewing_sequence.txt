@@ -1,0 +1,10 @@
+module sends information to viewer.
+
+viewer views the information
+
+if edit:
+sends infroamtion to the editor and searches for the correct entertainemnt
+
+------------------------------
+
+module controller > main controller > viewer > main controller > api > editor

@@ -144,7 +144,7 @@ public class MovieViewerController {
         // add production companies
         movie_production_companies.getItems().clear();
 
-        System.out.println(movie.getAnimationCompanies().length);
+        // System.out.println(movie.getAnimationCompanies().length);
 
         try {
             for (String production_company : movie.getAnimationCompanies()) {
@@ -153,7 +153,7 @@ public class MovieViewerController {
                 Label label = center_label_loader.load();
                 CenterLabelController clc = center_label_loader.getController();
 
-                System.out.println(production_company);
+                // System.out.println(production_company);
 
                 clc.setText(production_company);
                 movie_production_companies.getItems().add(label);
@@ -178,7 +178,7 @@ public class MovieViewerController {
 
     @FXML
     public void editEntertainment() {
-        api.getMfController().sendEntertainment(MainFrameController.ENTERTAINMENT_EDITOR, movie);
+        api.getMfController().editEntertainment(movie);
     }
 
     @FXML
