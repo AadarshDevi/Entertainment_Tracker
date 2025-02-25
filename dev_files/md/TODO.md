@@ -11,14 +11,6 @@
 - [ ] create Episodes so i can add miraculous ladybug season 6 eps and release dates, duration and ep number
 - [ ] reenable app to read anime and tv shows
 
-### Entertainment Creator, Editor
-
-- [x] entertainment editor's slider needs 3 new buttons:
-
-  > [x] Slider UI Format >> to first (<<) | back (<) | field | search (search icon) | next (>) | last (>>)
-
-- [x] add save button
-
 ### Data Writing and Formating
 
 - [ ] toString will be int the data format (see data.txt)
@@ -86,3 +78,11 @@
 
   - [x] add movie viewer to the app.
   - [x] add anime viewer to the app.
+
+### Feb 25, 2025
+
+- [x] entertainment editor's slider needs 3 new buttons:
+
+  > [x] Slider UI Format >> to first (<<) | back (<) | field | search (search icon) | next (>) | last (>>)
+
+- [x] add save button in editor
