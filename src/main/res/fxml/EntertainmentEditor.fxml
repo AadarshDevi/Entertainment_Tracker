@@ -47,7 +47,7 @@
                      <right>
                         <HBox prefHeight="35.0" prefWidth="89.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="search_button" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#getEditorSize" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 0 0 0 0;">
+                              <Button fx:id="search_button" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 0 0 0 0;">
                                  <font>
                                     <Font name="SansSerif Bold" size="18.0" />
                                  </font>
@@ -134,7 +134,7 @@
                         <CheckBox fx:id="entertainment_status_5" mnemonicParsing="false" onAction="#checkSecondaryStatus" prefHeight="54.0" prefWidth="224.0" text="Pilot" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
-                  <Button fx:id="save_button" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Save" />
+                  <Button fx:id="save_button" mnemonicParsing="false" onAction="#save_current_entertainment" prefHeight="31.0" prefWidth="113.0" text="Save" />
                </children>
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" top="10.0" />

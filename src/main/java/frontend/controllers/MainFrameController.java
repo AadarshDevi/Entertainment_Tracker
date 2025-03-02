@@ -4,15 +4,11 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
@@ -22,7 +18,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import main.java.api.API;
 import main.java.api.Logger.ConsoleLog;
 import main.java.api.Logger.ConsoleLogFactory;
@@ -94,6 +89,8 @@ public class MainFrameController {
     private AnimeViewerController avController;
 
     // private int searchID;
+
+    private ArrayList<BorderPane> duplicateSearchList;
 
     ConsoleLog logger = ConsoleLogFactory.getLogger();
 
@@ -262,25 +259,7 @@ public class MainFrameController {
                     logger.log(this, "Viewer Disabled");
                 }
                 break;
-            /*
-             * // Entertainment Editor
-             * case 3:
-             * if (!api.isEditorDisabled()) {
-             * logger.log(this, "Entered Editor");
-             * // api.editEntertainment(moduleID);
-             * } else {
-             * logger.log(this, "Editor Disabled");
-             * }
-             * break;
-             * 
-             * // Entertainment Bulk Editor
-             * case 4:
-             * break;
-             * 
-             * // Entertainment Creator
-             * case 5:
-             * break;
-             */
+
             default:
                 logger.error(this, new Exception("placeID does not exist"));
         }
@@ -310,7 +289,7 @@ public class MainFrameController {
         list_search.getItems().clear();
 
         // the modules that will be removed from this list
-        ArrayList<BorderPane> duplicateSearchList = new ArrayList<>(ogSearchModules);
+        duplicateSearchList = new ArrayList<>(ogSearchModules);
 
         // this list contains modules to be removed
         ArrayList<BorderPane> removedModules = new ArrayList<>();
@@ -373,6 +352,7 @@ public class MainFrameController {
         list_completed.refresh();
         list_released.refresh();
         list_upcoming.refresh();
+
     }
 
     @FXML
@@ -383,4 +363,34 @@ public class MainFrameController {
     public void editEntertainment(Entertainment entertainment) {
         api.editEntertainment(entertainment);
     }
+
+    public ListView<BorderPane> getSearchList() {
+        return list_search;
+    }
+
+    public ArrayList<BorderPane> getSearchArrayList() {
+        return ogSearchModules;
+    }
+
+    public void resetViewer(int searchID) {
+
+        information_viewer_stand_in.getChildren().clear();
+
+        mvController.setSize(
+                information_viewer_stand_in.getWidth(),
+                information_viewer_stand_in.getHeight());
+
+        information_viewer_stand_in.getChildren().add(movieViewer);
+
+        BorderPane module = ogSearchModules.get(searchID);
+        ModuleController controller = (ModuleController) module.getProperties().get("controller");
+        mvController.view((Movie) controller.getEntertainment());
+
+        logger.log(this, "Movie viewer reseted");
+    }
+
+    public ArrayList<BorderPane> getSearchResultModules() {
+        return duplicateSearchList;
+    }
+
 }

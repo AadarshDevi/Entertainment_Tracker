@@ -89,7 +89,7 @@ Movie<##>Mickey, Donald, Goofy: The Three Musketeers<##>NVR<##>1<##>Mickey Mouse
 Movie<##>Migration<##>NVR<##>1<##>Migration<##>83<##>2023-12-22<##>Universal Pictures<<>>Illumination
 Movie<##>Minions<##>NVR<##>1<##>Minions<##>91<##>2015-07-10<##>Illumination<<>>Universal Pictures
 Movie<##>Minions 2<##>The Rise of Gru<##>1<##>despicable me<##>87<##>2022-07-01<##>Universal Pictures<<>>Illumination
-Movie<##>Miraculous<##>Ladybug and Cat Noir, The Movie<##>1<##>miraculous movie<<>>miraculous ladybug movie<##>105<##>2023-07-28<##>Zagtoon<<>>Fantawild Animation
+Movie<##>-Miraculous<##>Ladybug and Cat Noir, The Movie<##>1<##>miraculous movie<<>>miraculous ladybug movie<##>105<##>2023-07-28<##>Zagtoon<<>>Fantawild Animation
 Movie<##>Moana<##>NVR<##>1<##>Moana<##>107<##>2016-11-23<##>Disney
 Movie<##>The Monkey King<##>NVR<##>1<##>Monkey King<##>96<##>2023-08-18<##>Netflix Animation<<>>Pearl Studio<<>>Star Overseas
 Movie<##>Monster House<##>NVR<##>1<##>Monster House<##>91<##>2006-07-21<##>Columbia Pictures<<>>Relativity Media<<>>ImageMovers<<>>Amblin Entertainment

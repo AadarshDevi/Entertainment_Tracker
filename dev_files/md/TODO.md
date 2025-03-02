@@ -11,6 +11,12 @@
 - [ ] create Episodes so i can add miraculous ladybug season 6 eps and release dates, duration and ep number
 - [ ] reenable app to read anime and tv shows
 
+### Editor and creator
+
+- [ ] add verification system when saving entertainment
+  - entertainment without a franchise cannot be used.
+  - date and primary status needed
+
 ### Data Writing and Formating
 
 - [ ] toString will be int the data format (see data.txt)

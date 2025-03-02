@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.java.api.Logger.ConsoleLog;
 import main.java.api.Logger.ConsoleLogFactory;
@@ -15,6 +16,7 @@ import main.java.backend.SearchEngine.IncrementalSearch;
 import main.java.backend.entertainment.Entertainment;
 import main.java.frontend.controllers.EditorController;
 import main.java.frontend.controllers.MainFrameController;
+import main.java.frontend.controllers.ModuleController;
 
 public class API {
 
@@ -105,9 +107,12 @@ public class API {
                 editor.getProperties().put("controller", eController);
                 eController.setApi(this);
                 eController.setEntertainmentList(getBackend().getEntertainmentList());
+                eController.setEditor();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            // logger.debug(this, "before error");
 
             editorScene = new Scene(editor);
             entertainmentEditor = new Stage();
@@ -202,6 +207,26 @@ public class API {
     public void getEditorSize() {
         logger.debug(this, editor.getWidth() + " :: " +
                 editor.getHeight());
+    }
+
+    public void sendRefreshModule(int searchID) {
+        logger.log(this, "Search ID: " + searchID);
+        logger.log(this, "Information reset method activated");
+
+        BorderPane duplicateModule = mfController.getSearchArrayList().get(searchID);
+        ModuleController mController = (ModuleController) duplicateModule.getProperties().get("controller");
+        mController.refresh();
+        mfController.getSearchList().getItems().clear();
+
+        mfController.getSearchList().getItems().addAll(mfController.getSearchResultModules());
+        mfController.resetViewer(searchID);
+
+        logger.log(this, "Information reset");
+
+    }
+
+    public void closeEditor() {
+        entertainmentEditor.hide();
     }
 
     // new method

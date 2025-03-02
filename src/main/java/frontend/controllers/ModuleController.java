@@ -39,6 +39,8 @@ public class ModuleController {
 
     private void viewEntertainment() {
 
+        // logger.debug(this, "Onclick: " + entertainment.getFranchise());
+
         // set module name
         if (entertainment.getTitle().equals("NVR")) {
             module_name.setText(entertainment.getFranchise());
@@ -48,6 +50,7 @@ public class ModuleController {
         } else {
             module_name.setText(entertainment.getFranchise() + ": " +
                     entertainment.getTitle());
+            logger.debug(this, "Logging: " + entertainment.getFranchise());
         }
 
         LocalDate unknownDate = LocalDate.of(3000, 01, 01);
@@ -122,6 +125,9 @@ public class ModuleController {
     @FXML
     public void onClicked() {
 
+        refresh();
+        logger.debug(this, "refreshed module: " + entertainment.getFranchise());
+
         if (!api.isViewerDisabled()) {
             logger.log(this, ("Module clicked: " + entertainment.getFranchise()));
             int placeID = (entertainment.getType().equals("Movie")) ? 1 : 2;
@@ -130,6 +136,12 @@ public class ModuleController {
         } else {
             logger.log(this, "Viewer Disabled");
         }
+    }
+
+    public void refresh() {
+        setEntertainment(entertainment);
+        viewEntertainment();
+
     }
 
 }

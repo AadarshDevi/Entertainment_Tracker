@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import main.java.api.API;
 import main.java.api.Logger.ConsoleLog;
@@ -67,12 +69,36 @@ public class EditorController {
     private ArrayList<Entertainment> entertainmentList;
 
     private API api;
-
     private ConsoleLog logger;
 
+    @FXML
+    private Button to_first_button;
+    @FXML
+    private Button previous_button;
+    @FXML
+    private Button search_button;
+    @FXML
+    private Button next_button;
+    @FXML
+    private Button to_last_button;
+
+    private Entertainment entertainment;
+
+    private int searchID;
+
     public void setApi(API api) {
+
         this.api = api;
         logger = ConsoleLogFactory.getLogger();
+    }
+
+    private void disbaleSlider() {
+        to_first_button.setDisable(true);
+        previous_button.setDisable(true);
+        search_button.setDisable(true);
+        next_button.setDisable(true);
+        to_last_button.setDisable(true);
+        module_id.setDisable(true);
     }
 
     public Entertainment addEntertainment() {
@@ -126,22 +152,27 @@ public class EditorController {
 
     public void editEntertainment(Entertainment entertainment) throws Exception {
 
-        int entertainmentIndex = findEntertainment(entertainment);
+        disbaleSlider();
 
-        logger.debug(this, entertainmentIndex + "");
+        this.entertainment = entertainment;
 
-        if (entertainmentIndex >= 0) {
+        searchID = findEntertainment(entertainment);
+
+        logger.debug(this, searchID + "");
+
+        if (searchID >= 0) {
             logger.log(this, "Entertainment found");
 
             if (entertainment.getType().equals(Entertainment.MOVIE)) {
 
-                module_id.setText((entertainmentIndex + 1) + "");
+                module_id.setText((searchID + 1) + "");
                 setMovie((Movie) entertainment);
 
                 // TODO: Add anime
             } else {
                 logger.error(this, new Exception("Entertainment Type not found"));
             }
+            entertainment_franchise.requestFocus();
 
         } else {
             logger.error(this, new Exception("Entertainment not found: " + entertainment.getFranchise()));
@@ -151,6 +182,8 @@ public class EditorController {
                     JOptionPane.ERROR_MESSAGE);
             throw new Exception("Entertainment Not Found");
         }
+
+        // disabledSlider();
 
     }
 
@@ -267,9 +300,11 @@ public class EditorController {
         // duration and release date
         entertainment_duration.setText(movie.getDuration() + "");
         entertainment_release_date.setText(movie.getDate() + "");
+
     }
 
     // TODO: add animes/tv shows
+    @SuppressWarnings("unused")
     private void setAnime(Anime anime) {
     }
 
@@ -339,4 +374,62 @@ public class EditorController {
         api.getEditorSize();
     }
 
+    public void setEditor() {
+        String filepath = "../../../res/img/search_icon.png";
+        // String filepath =
+        // "D:\\Programming\\Java\\Projects\\Entertainment_Tracker\\Group_3\\Build_1\\src\\main\\res\\img\\search_icon.png";
+
+        Image image = new Image(getClass().getResourceAsStream(filepath));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(search_button.getPrefHeight() - 12);
+        imageView.setFitWidth(search_button.getPrefWidth() - 12);
+        imageView.setPreserveRatio(true);
+        search_button.setText("");
+        search_button.setGraphic(imageView);
+        // search_button.setContentDisplay(ContentDisplay.CENTER);
+
+    }
+
+    @FXML
+    public void save_current_entertainment() {
+
+        switch (entertainment.getType()) {
+            case Entertainment.MOVIE:
+                Movie movie = (Movie) entertainment;
+
+                if (!movie.getType().equals(Entertainment.MOVIE))
+                    movie.setType(Entertainment.MOVIE);
+                if (!movie.getFranchise().equals(entertainment_franchise.getText())) {
+                    movie.setFranchise(entertainment_franchise.getText());
+                    logger.debug(this, "Saving: " + movie.getFranchise());
+                }
+                if (!movie.getTitle().equals(entertainment_title.getText()))
+                    movie.setFranchise(entertainment_title.getText());
+                // TODO: DO Date
+                // if(!movie.getDate().equals(Entertainment.MOVIE)) movie.;
+                if (movie.getDuration() != Integer.parseInt(entertainment_duration.getText()))
+                    movie.setDuration(Integer.parseInt(entertainment_duration.getText()));
+
+                // TODO: primary status and secondary status
+
+                // TODO: tags and production companies
+
+                break;
+
+            default:
+                break;
+        }
+
+        api.sendRefreshModule(searchID);
+        api.closeEditor();
+
+    }
+
+    public void refreshModules() {
+
+    }
+
+    public int getSearchID() {
+        return searchID;
+    }
 }
