@@ -1,5 +1,13 @@
 # Entertainment Tracker Change Log
 
+## Mar 1, 2025
+
+### Changed/Updated
+
+- Editor uses search index to get entertainment.
+  - the viewer used to hide but now it shows updated information.
+  - list_search used to reset when entertainment saved in editor.
+
 ## Feb 25, 2025
 
 ### Added
@@ -16,7 +24,7 @@
 
 ### Fixed
 
-- the first element of the list is now editab;e.
+- the first element of the list is now editable.
   > some small logical error accumilated into a big error. logical error when checking indexing.
 
 ## Feb 24, 2025
@@ -231,7 +239,7 @@
 
 - placeholder
 
-### Changed
+### Changed/Updated
 
 - placeholder
 

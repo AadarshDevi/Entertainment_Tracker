@@ -57,8 +57,9 @@ public class API {
 
         try {
             eController.editEntertainment(entertainment);
-            entertainmentEditor.setTitle("Entertainment Editer");
+            entertainmentEditor.setTitle("Entertainment Editor");
             entertainmentEditor.show();
+            Client.disable();
         } catch (Exception e) {
             entertainmentEditor.hide();
             logger.log(this, "Editor not opened");
@@ -205,28 +206,31 @@ public class API {
     }
 
     public void getEditorSize() {
-        logger.debug(this, editor.getWidth() + " :: " +
-                editor.getHeight());
+        // logger.debug(this, editor.getWidth() + " :: " +
+        // editor.getHeight());
     }
 
     public void sendRefreshModule(int searchID) {
         logger.log(this, "Search ID: " + searchID);
-        logger.log(this, "Information reset method activated");
+        // logger.log(this, "Information reset method activated");
 
         BorderPane duplicateModule = mfController.getSearchArrayList().get(searchID);
         ModuleController mController = (ModuleController) duplicateModule.getProperties().get("controller");
         mController.refresh();
         mfController.getSearchList().getItems().clear();
 
-        mfController.getSearchList().getItems().addAll(mfController.getSearchResultModules());
-        mfController.resetViewer(searchID);
+        if (mfController.getSearchResultModules() != null) {
+            mfController.getSearchList().getItems().addAll(mfController.getSearchResultModules());
+            mfController.resetViewer(searchID);
+        }
 
-        logger.log(this, "Information reset");
+        // logger.log(this, "Information reset");
 
     }
 
     public void closeEditor() {
         entertainmentEditor.hide();
+        Client.enable();
     }
 
     // new method

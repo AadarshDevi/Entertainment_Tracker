@@ -9,6 +9,8 @@ import main.java.frontend.controllers.MainFrameController;
 
 public class Client extends Application {
 
+    private static VBox mainFrame;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -20,7 +22,7 @@ public class Client extends Application {
 
         // create mainframe ui and controller
         FXMLLoader mainframeLoader = new FXMLLoader(getClass().getResource("../../res/fxml/Mainframe.fxml"));
-        VBox mainFrame = mainframeLoader.load();
+        mainFrame = mainframeLoader.load();
         MainFrameController mfController = mainframeLoader.getController();
 
         // api creates backend, logger and search engine
@@ -44,6 +46,14 @@ public class Client extends Application {
         stage.setResizable(false);
         stage.show();
 
+    }
+
+    public static void disable() {
+        mainFrame.setDisable(true);
+    }
+
+    public static void enable() {
+        mainFrame.setDisable(false);
     }
 
 }

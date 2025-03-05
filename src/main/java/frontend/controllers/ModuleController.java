@@ -126,7 +126,7 @@ public class ModuleController {
     public void onClicked() {
 
         refresh();
-        logger.debug(this, "refreshed module: " + entertainment.getFranchise());
+        // logger.debug(this, "refreshed module: " + entertainment.getFranchise());
 
         if (!api.isViewerDisabled()) {
             logger.log(this, ("Module clicked: " + entertainment.getFranchise()));

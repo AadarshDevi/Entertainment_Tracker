@@ -13,7 +13,7 @@
 
 ### Editor and creator
 
-- [ ] add verification system when saving entertainment
+- [/] add verification system when saving entertainment
   - entertainment without a franchise cannot be used.
   - date and primary status needed
 

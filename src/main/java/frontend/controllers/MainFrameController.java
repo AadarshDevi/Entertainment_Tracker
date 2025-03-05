@@ -390,7 +390,9 @@ public class MainFrameController {
     }
 
     public ArrayList<BorderPane> getSearchResultModules() {
-        return duplicateSearchList;
+        if (duplicateSearchList != null)
+            return duplicateSearchList;
+        return null;
     }
 
 }
