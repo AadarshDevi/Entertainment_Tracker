@@ -8,12 +8,14 @@
 
   > all of the work for this is in mainframe
 
-- [ ] create Episodes so i can add miraculous ladybug season 6 eps and release dates, duration and ep number
+- [ ]
+  create Episodes (new class extends entertainment) so i can add miraculous ladybug season 6 eps and release dates, duration and ep number
 - [ ] reenable app to read anime and tv shows
 
 ### Editor and creator
 
 - [/] add verification system when saving entertainment
+
   - entertainment without a franchise cannot be used.
   - date and primary status needed
 
@@ -34,6 +36,18 @@
 <!-- > can be viewed like the tags -->
 
 ## Completed
+
+### Mar 5, 2025
+
+- [x] mainframe must be disabled when editor is opened
+
+### Feb 25, 2025
+
+- [x] entertainment editor's slider needs 3 new buttons:
+
+  > [x] Slider UI Format >> to first (<<) | back (<) | field | search (search icon) | next (>) | last (>>)
+
+- [x] add save button in editor
 
 ### Feb 24, 2025
 
@@ -84,11 +98,3 @@
 
   - [x] add movie viewer to the app.
   - [x] add anime viewer to the app.
-
-### Feb 25, 2025
-
-- [x] entertainment editor's slider needs 3 new buttons:
-
-  > [x] Slider UI Format >> to first (<<) | back (<) | field | search (search icon) | next (>) | last (>>)
-
-- [x] add save button in editor

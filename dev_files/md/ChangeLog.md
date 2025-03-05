@@ -1,6 +1,12 @@
 # Entertainment Tracker Change Log
 
-## Mar 1, 2025
+## Mar 3, 2025 >> Version 3.1.A.1.3.3
+
+### Added
+
+- when editor is active, the main window will be disabled. changes cannot be made to the main window.
+
+## Mar 1, 2025 >> Version 3.1.A.1.3.2
 
 ### Changed/Updated
 
@@ -8,26 +14,18 @@
   - the viewer used to hide but now it shows updated information.
   - list_search used to reset when entertainment saved in editor.
 
-## Feb 25, 2025
-
-### Added
-
-- placeholder
+## Feb 25, 2025 >> Version 3.1.A.1.3.1
 
 ### Changed / Updated
 
 - updated editor fxml by adding the 3 three more slider buttons and adding a save button.
-
-### Problems
-
-- placeholder
 
 ### Fixed
 
 - the first element of the list is now editable.
   > some small logical error accumilated into a big error. logical error when checking indexing.
 
-## Feb 24, 2025
+## Feb 24, 2025 >> Version 3.1.A.1.3.0
 
 ### Added
 

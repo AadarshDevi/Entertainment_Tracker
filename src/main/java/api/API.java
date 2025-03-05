@@ -79,14 +79,17 @@ public class API {
         // put information into modules
         mfController.setModules(backend.getEntertainmentList());
 
-        // disabling the viewer feature
-        // disableViewer();
+        // disablers
+        {
+            // disabling the viewer feature
+            // disableViewer();
 
-        // disabling the search feature
-        // mfController.disableSearch();
+            // disabling the search feature
+            // mfController.disableSearch();
 
-        // disabling the editing feature
-        // disableEditor();
+            // disabling the editing feature
+            // disableEditor();
+        }
 
         // put modules in the ui
         mfController.populateModules();
