@@ -39,7 +39,8 @@ public class ModuleController {
 
     private void viewEntertainment() {
 
-        // logger.debug(this, "Onclick: " + entertainment.getFranchise());
+        // logger.debug(this, "Set View Module: " + entertainment.getFranchise() + ": "
+        // + entertainment.getTitle());
 
         // set module name
         if (entertainment.getTitle().equals("NVR")) {

@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import main.java.api.API;
 import main.java.api.Logger.ConsoleLog;
 import main.java.api.Logger.ConsoleLogFactory;
+import main.java.backend.SearchEngine.IncrementalSearch;
 import main.java.backend.entertainment.Anime;
 import main.java.backend.entertainment.Entertainment;
 import main.java.backend.entertainment.Movie;
@@ -100,23 +101,26 @@ public class MainFrameController {
         search_field.setOnKeyPressed(event -> {
             // Get current text BEFORE processing event
             String currentText = search_field.getText();
+
+            IncrementalSearch searchEngine = api.getSearchEngine();
+
             if (event.getCode() == KeyCode.ENTER) {
                 // System.out.println("\n\nActual Text: '" + currentText + "'");
                 // System.out.println(">>> Search Text: '" + currentText + "'");
 
                 logger.log(this, "Search Text: '" + currentText + "'");
 
-                searchResults = api.getSearchEngine().simpleSearch(currentText);
+                searchResults = searchEngine.simpleSearch(currentText);
 
                 searchController();
-                System.out.println("Current Search List: " +
-                        api.getSearchEngine().getCurrentSearchList().size());
+                logger.log(this, "Current Search List: " +
+                        searchEngine.getCurrentSearchList().size());
 
             } else if (currentText.isEmpty()) {
                 System.out.println("\n\n>>> Resetting Search Engine");
-                api.getSearchEngine().resetEngine();
-                System.out.println("Current Search List: " +
-                        api.getSearchEngine().getCurrentSearchList().size());
+                searchEngine.resetEngine();
+                logger.log(this, "Current Search List: " +
+                        searchEngine.getCurrentSearchList().size());
             }
         });
     }

@@ -19,6 +19,11 @@
   - entertainment without a franchise cannot be used.
   - date and primary status needed
 
+  - Add buttons to editor ui:
+    - close button
+      - close function in save will come to this
+    - add button for adding entertainments. (entertainment creator)
+
 ### Data Writing and Formating
 
 - [ ] toString will be int the data format (see data.txt)

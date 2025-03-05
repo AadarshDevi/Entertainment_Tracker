@@ -134,7 +134,13 @@
                         <CheckBox fx:id="entertainment_status_5" mnemonicParsing="false" onAction="#checkSecondaryStatus" prefHeight="54.0" prefWidth="224.0" text="Pilot" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
-                  <Button fx:id="save_button" mnemonicParsing="false" onAction="#save_current_entertainment" prefHeight="31.0" prefWidth="113.0" text="Save" />
+                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="448.0" spacing="13.0">
+                     <children>
+                        <Button id="save_button" fx:id="save_button" mnemonicParsing="false" onAction="#saveCurrentEntertainment" prefHeight="31.0" prefWidth="113.0" stylesheets="@../css/test.css" text="Save" />
+                        <Button fx:id="add_button" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Add" />
+                        <Button fx:id="close_button" mnemonicParsing="false" onAction="#closeEditor" prefHeight="31.0" prefWidth="113.0" stylesheets="@../css/test.css" text="Close" />
+                     </children>
+                  </HBox>
                </children>
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" top="10.0" />

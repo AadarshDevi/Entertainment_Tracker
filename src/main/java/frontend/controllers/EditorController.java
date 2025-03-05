@@ -82,9 +82,23 @@ public class EditorController {
     @FXML
     private Button to_last_button;
 
+    @FXML
+    private Button save_button;
+    @FXML
+    private Button add_button;
+    @FXML
+    private Button close_button;
+
     private Entertainment entertainment;
 
     private int searchID;
+
+    @SuppressWarnings("unused")
+    public void initialize() {
+        entertainment_franchise.textProperty().addListener((o, ov, nv) -> {
+            save_button.setStyle("");
+        });
+    }
 
     public void setApi(API api) {
 
@@ -152,16 +166,18 @@ public class EditorController {
 
     public void editEntertainment(Entertainment entertainment) throws Exception {
 
+        add_button.setDisable(true);
+
         disbaleSlider();
 
         this.entertainment = entertainment;
 
         searchID = findEntertainment(entertainment);
 
-        logger.debug(this, searchID + "");
+        // logger.debug(this, searchID + "");
 
         if (searchID >= 0) {
-            logger.log(this, "Entertainment found");
+            logger.log(this, "Entertainment found: #" + searchID);
 
             if (entertainment.getType().equals(Entertainment.MOVIE)) {
 
@@ -391,7 +407,7 @@ public class EditorController {
     }
 
     @FXML
-    public void save_current_entertainment() {
+    public void saveCurrentEntertainment() {
 
         switch (entertainment.getType()) {
             case Entertainment.MOVIE:
@@ -401,7 +417,7 @@ public class EditorController {
                     movie.setType(Entertainment.MOVIE);
                 if (!movie.getFranchise().equals(entertainment_franchise.getText())) {
                     movie.setFranchise(entertainment_franchise.getText());
-                    logger.debug(this, "Saving: " + movie.getFranchise());
+                    logger.log(this, "Saving: " + movie.getFranchise());
                 }
                 if (!movie.getTitle().equals(entertainment_title.getText()))
                     movie.setFranchise(entertainment_title.getText());
@@ -421,12 +437,18 @@ public class EditorController {
         }
 
         api.sendRefreshModule(searchID);
-        api.closeEditor();
+
+        // change color of save button to green
+        save_button.setStyle("-fx-background-color:rgb(0, 139, 0); -fx-text-fill: white;");
+
+        logger.log(this, "Information saved");
 
     }
 
-    public void refreshModules() {
-
+    @FXML
+    private void closeEditor() {
+        saveCurrentEntertainment();
+        api.closeEditor();
     }
 
     public int getSearchID() {

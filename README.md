@@ -51,9 +51,9 @@
   - [x] movies
   - [_] anime / tv shows
 - [x] Create Entertainment UI
-- [_] add movies and tv shows
-- [_] edit entertainment
+- [x] edit entertainment
 - [_] bulk edit entertainment
+- [_] add movies and tv shows
 
 ## Testing Phases
 
@@ -83,9 +83,6 @@
 
 ### Test 3
 
-- ui opening test
-- reading info
-- displaying info
 - viewer
 
 - disabled:
@@ -95,10 +92,6 @@
 
 ### Test 4
 
-- ui opening test
-- reading info
-- displaying info
-- viewer
 - search
 
 - disabled:
@@ -107,16 +100,17 @@
 
 ### Test 5
 
-- ui opening test
-- reading info
-- displaying info
-- viewer
-- search
 - editor
 
 - disabled:
   - bulk editor
   - save file
+
+#### Test 5.1
+
+- editor
+  - save function
+  - close function
 
 ### Test 6
 

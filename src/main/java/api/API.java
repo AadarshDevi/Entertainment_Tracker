@@ -232,8 +232,10 @@ public class API {
     }
 
     public void closeEditor() {
+        logger.log(this, "Editor closed");
         entertainmentEditor.hide();
         Client.enable();
+        logger.log(this, "Client enabled");
     }
 
     // new method
