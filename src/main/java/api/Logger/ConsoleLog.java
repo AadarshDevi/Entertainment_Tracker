@@ -14,7 +14,7 @@ public class ConsoleLog implements LoggingInterface {
 
     @Override
     public void debug(Object object, String string) {
-        System.out.println("[DEBUG : " + object.getClass() + "] >>> " + string);
+        System.out.println("\n[DEBUG : " + object.getClass() + "] >>> " + string);
     }
 
 }

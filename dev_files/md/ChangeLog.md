@@ -1,5 +1,11 @@
 # Entertainment Tracker Change Log
 
+## Mar 9, 2025 >> Version 3.1.A.1.3.3
+
+### Fixed
+
+- there was a bug where the information in a module in the completed, +2 lists were not being updated when the information in the search list was updated.
+
 ## Mar 3, 2025 >> Version 3.1.A.1.3.3
 
 ### Added

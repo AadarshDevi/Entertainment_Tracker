@@ -38,6 +38,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -60,8 +61,11 @@
           <items>
                   <Menu mnemonicParsing="false" text="Entertainment">
                     <items>
-                      <MenuItem fx:id="edit_entertainment_add" mnemonicParsing="false" text="Add" />
+                      <MenuItem fx:id="edit_entertainment_add" mnemonicParsing="false" onAction="#add_entertainment" text="Add" />
                   <MenuItem fx:id="edit_entertainment_edit" mnemonicParsing="false" text="Edit" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="testing_add_season_module" mnemonicParsing="false" onAction="#addSeasonModule" text="(Alpha Testing) Add TV Show" />
+                        <MenuItem fx:id="testing_remove_season_module" mnemonicParsing="false" onAction="#removeSeasonModule" text="(Alpha Testing) Remove TV Show" />
                     </items>
                   </Menu>
           </items>

@@ -8,10 +8,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import main.java.api.API;
+import main.java.api.apiloader.API;
 import main.java.backend.entertainment.Anime;
 import main.java.backend.entertainment.Entertainment;
+import main.java.backend.entertainment.Episode;
 import main.java.backend.entertainment.Movie;
+import main.java.backend.entertainment.Season;
 
 public class Backend {
 
@@ -19,6 +21,7 @@ public class Backend {
 
     private ArrayList<String> rawData = new ArrayList<>();
     private ArrayList<Entertainment> entertainmentList = new ArrayList<>();
+    private ArrayList<Entertainment> seasonList = new ArrayList<>();
 
     public Backend(API api) {
         // this.api = api;
@@ -36,6 +39,8 @@ public class Backend {
 
             // create filereader that reads from data.txt
             BufferedReader fileReader = new BufferedReader(new FileReader(new File("src/main/res/data.txt")));
+            // BufferedReader fileReader = new BufferedReader(new FileReader(new
+            // File("src/main/res/data_2.txt")));
             String line;
 
             while ((line = fileReader.readLine()) != null) {
@@ -79,6 +84,11 @@ public class Backend {
                         Integer.parseInt(list[6]), // episode num
                         LocalDate.parse(list[7]), // date
                         Integer.parseInt(list[8])); // duration
+            case "Season": // TODO: add season to entertainment and season list
+                return new Season("Season", "Miraculous", "Tales of Ladybug and Cat Noir", new String[2], new String[2],
+                        6);
+            case "Episode": // TODO: add to corresponging season
+                return new Episode(null, null, null, 0, 0, null, null, null, list, list);
 
             default:
                 return new Entertainment(

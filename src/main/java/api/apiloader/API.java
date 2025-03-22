@@ -1,4 +1,4 @@
-package main.java.api;
+package main.java.api.apiloader;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import main.java.api.Client;
 import main.java.api.Logger.ConsoleLog;
 import main.java.api.Logger.ConsoleLogFactory;
 import main.java.backend.Backend;
@@ -16,7 +17,7 @@ import main.java.backend.SearchEngine.IncrementalSearch;
 import main.java.backend.entertainment.Entertainment;
 import main.java.frontend.controllers.EditorController;
 import main.java.frontend.controllers.MainFrameController;
-import main.java.frontend.controllers.ModuleController;
+import main.java.frontend.controllers.vierer.ModuleController;
 
 public class API {
 
@@ -41,30 +42,15 @@ public class API {
         logger = ConsoleLogFactory.getLogger();
     }
 
-    // creates the backend and search engine
-    public void createBackend() {
-        backend = new Backend(this);
-        engine = new IncrementalSearch(50);
-    }
-
     // connects api to mainframe controller
     public void connectMainFrameController(MainFrameController mfController) {
         this.mfController = mfController;
     }
 
-    // the entertainment passed will be edited in the editer
-    public void editEntertainment(Entertainment entertainment) {
-
-        try {
-            eController.editEntertainment(entertainment);
-            entertainmentEditor.setTitle("Entertainment Editor");
-            entertainmentEditor.show();
-            Client.disable();
-        } catch (Exception e) {
-            entertainmentEditor.hide();
-            logger.log(this, "Editor not opened");
-        }
-
+    // creates the backend and search engine
+    public void createBackend() {
+        backend = new Backend(this);
+        engine = new IncrementalSearch(50);
     }
 
     // starts the backend processes
@@ -73,7 +59,6 @@ public class API {
         engine.setOriginalList(backend.getRawData()); // SearchEngine setup
     }
 
-    // starts the frontend processes
     public void setFrontend() {
 
         // put information into modules
@@ -105,11 +90,11 @@ public class API {
 
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(
-                        getClass().getResource("../../res/fxml/EntertainmentEditor.fxml"));
+                        getClass().getResource("../../../res/fxml/EntertainmentEditor.fxml"));
                 editor = fxmlLoader.load();
                 eController = fxmlLoader.getController();
                 editor.getProperties().put("controller", eController);
-                eController.setApi(this);
+                eController.setApi();
                 eController.setEntertainmentList(getBackend().getEntertainmentList());
                 eController.setEditor();
             } catch (IOException e) {
@@ -126,6 +111,25 @@ public class API {
         }
 
     }
+
+    // the entertainment passed will be edited in the editer
+    public void editEntertainment(Entertainment entertainment) {
+
+        logger.log(this, "editing: " + entertainment.getFranchise());
+
+        try {
+            eController.editEntertainment(entertainment);
+            entertainmentEditor.setTitle("Entertainment Editor");
+            entertainmentEditor.show();
+            Client.disable();
+        } catch (Exception e) {
+            entertainmentEditor.hide();
+            logger.log(this, "Editor not opened");
+        }
+
+    }
+
+    // starts the frontend processes
 
     @SuppressWarnings("unused")
     private void disableViewer() {
@@ -197,6 +201,10 @@ public class API {
 
     // search engine
     public IncrementalSearch getSearchEngine() {
+        { // is api null
+            boolean isNull = (this == null) ? true : false;
+            logger.debug(this, "Is api null (in api): " + isNull);
+        }
         return engine;
     }
 
@@ -225,6 +233,10 @@ public class API {
         if (mfController.getSearchResultModules() != null) {
             mfController.getSearchList().getItems().addAll(mfController.getSearchResultModules());
             mfController.resetViewer(searchID);
+            mfController.resetList();
+
+        } else {
+            mfController.resetList();
         }
 
         // logger.log(this, "Information reset");
@@ -238,5 +250,10 @@ public class API {
         logger.log(this, "Client enabled");
     }
 
-    // new method
+    public void addEntertainment() {
+        entertainmentEditor.setTitle("Entertainment Creator");
+        eController.createEntertainment();
+        Client.disable();
+        entertainmentEditor.show();
+    }
 }

@@ -1,4 +1,4 @@
-package main.java.frontend.controllers;
+package main.java.frontend.controllers.vierer;
 
 import java.io.IOException;
 
@@ -9,42 +9,26 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import main.java.api.API;
+import main.java.api.apiloader.API;
+import main.java.api.apiloader.APIFactory;
 import main.java.backend.entertainment.Anime;
+import main.java.frontend.controllers.CenterLabelController;
+import main.java.frontend.controllers.ParentController;
 
-public class AnimeViewerController {
+public class AnimeViewerController extends ParentController {
 
     private API api;
 
-    @FXML
-    private Label entertainment_type;
-
-    @FXML
-    private Label entertainment_franchise;
-
-    @FXML
-    private Label entertainment_title;
-
-    @FXML
-    private Label entertainment_info;
-
-    @FXML
-    private Label entertainment_primary_status;
-
-    @FXML
-    private Label entertainment_release_date;
-
-    @FXML
-    private Label entertainment_duration;
-
-    @FXML
-    private ListView<Label> entertainment_tag_grid;
-
-    @FXML
-    private Button entertainment_button_edit;
-
-    @FXML
-    private Button entertainment_button_copy;
+    @FXML private Label entertainment_type;
+    @FXML private Label entertainment_franchise;
+    @FXML private Label entertainment_title;
+    @FXML private Label entertainment_info;
+    @FXML private Label entertainment_primary_status;
+    @FXML private Label entertainment_release_date;
+    @FXML private Label entertainment_duration;
+    @FXML private ListView<Label> entertainment_tag_grid;
+    @FXML private Button entertainment_button_edit;
+    @FXML private Button entertainment_button_copy;
 
     private Anime anime;
 
@@ -124,12 +108,12 @@ public class AnimeViewerController {
         clipboard.setContent(content);
     }
 
-    public API getApi() {
-        return api;
-    }
+    // public API getApi() {
+    // return api;
+    // }
 
-    public void setApi(API api) {
-        this.api = api;
+    public void setApi() {
+        this.api = APIFactory.getApi();
     }
 
 }

@@ -1,17 +1,19 @@
-package main.java.frontend.controllers;
+package main.java.frontend.controllers.vierer;
 
 import java.time.LocalDate;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import main.java.api.API;
 import main.java.api.Logger.ConsoleLog;
 import main.java.api.Logger.ConsoleLogFactory;
+import main.java.api.apiloader.API;
+import main.java.api.apiloader.APIFactory;
 import main.java.backend.entertainment.Anime;
 import main.java.backend.entertainment.Entertainment;
 import main.java.backend.entertainment.Movie;
+import main.java.frontend.controllers.ParentController;
 
-public class ModuleController {
+public class ModuleController extends ParentController {
 
     private final ConsoleLog logger = ConsoleLogFactory.getLogger();
 
@@ -20,17 +22,10 @@ public class ModuleController {
 
     private API api;
 
-    @FXML
-    private Label module_id;
-
-    @FXML
-    private Label module_name;
-
-    @FXML
-    private Label module_info_left;
-
-    @FXML
-    private Label module_info_right;
+    @FXML private Label module_id;
+    @FXML private Label module_name;
+    @FXML private Label module_info_left;
+    @FXML private Label module_info_right;
 
     public void setEntertainment(Entertainment entertainment) {
         this.entertainment = entertainment;
@@ -51,7 +46,7 @@ public class ModuleController {
         } else {
             module_name.setText(entertainment.getFranchise() + ": " +
                     entertainment.getTitle());
-            logger.debug(this, "Logging: " + entertainment.getFranchise());
+            // logger.debug(this, "Logging: " + entertainment.getFranchise());
         }
 
         LocalDate unknownDate = LocalDate.of(3000, 01, 01);
@@ -100,8 +95,8 @@ public class ModuleController {
         // list_completed.getParent().layout();
     }
 
-    public void setApi(API api) {
-        this.api = api;
+    public void setApi() {
+        this.api = APIFactory.getApi();
     }
 
     public void setId(int id) {
@@ -140,9 +135,16 @@ public class ModuleController {
     }
 
     public void refresh() {
-        setEntertainment(entertainment);
+        // setEntertainment(entertainment);
         viewEntertainment();
 
+    }
+
+    public void setTestData(String id, String name, String duration, String date) {
+        module_id.setText(id);
+        module_name.setText(name);
+        module_info_left.setText(duration);
+        module_info_right.setText(date);
     }
 
 }

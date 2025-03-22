@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -18,54 +19,40 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import main.java.api.API;
 import main.java.api.Logger.ConsoleLog;
 import main.java.api.Logger.ConsoleLogFactory;
+import main.java.api.apiloader.API;
+import main.java.api.apiloader.APIFactory;
 import main.java.backend.SearchEngine.IncrementalSearch;
 import main.java.backend.entertainment.Anime;
 import main.java.backend.entertainment.Entertainment;
 import main.java.backend.entertainment.Movie;
+import main.java.frontend.controllers.vierer.AnimeViewerController;
+import main.java.frontend.controllers.vierer.ModuleController;
+import main.java.frontend.controllers.vierer.MovieViewerController;
+import main.java.frontend.controllers.vierer.SeasonModuleController;
 
-public class MainFrameController {
+public class MainFrameController extends ParentController {
 
     public static final int ENTERTAINMENT_EDITOR = 3;
     public static final int ENTERTAINMENT_BULK_EDITOR = 4;
 
-    @FXML
-    private TabPane tabPane;
+    @FXML private AnchorPane information_viewer_stand_in;
 
-    @FXML
-    private ListView<BorderPane> list_completed;
+    @FXML private TabPane tabPane;
+    @FXML private MenuItem app_quit;
 
-    @FXML
-    private ListView<BorderPane> list_released;
+    @FXML private ListView<BorderPane> list_completed;
+    @FXML private ListView<BorderPane> list_released;
+    @FXML private ListView<BorderPane> list_upcoming;
+    @FXML private ListView<BorderPane> list_search;
 
-    @FXML
-    private ListView<BorderPane> list_upcoming;
+    @FXML private MenuItem edit_entertainment_add;
+    @FXML private MenuItem edit_entertainment_edit;
 
-    @FXML
-    private ListView<BorderPane> list_search;
-
-    @FXML
-    private MenuItem app_quit;
-
-    @FXML
-    private MenuItem edit_entertainment_add;
-
-    @FXML
-    private MenuItem edit_entertainment_edit;
-
-    @FXML
-    private TextField search_field;
-
-    @FXML
-    private AnchorPane information_viewer_stand_in;
-
-    @FXML
-    private Tab search_tab;
-
-    @FXML
-    private Button search_button;
+    @FXML private Tab search_tab;
+    @FXML private TextField search_field;
+    @FXML private Button search_button;
 
     private API api;
 
@@ -95,14 +82,30 @@ public class MainFrameController {
 
     ConsoleLog logger = ConsoleLogFactory.getLogger();
 
+    private SeasonModuleController smController;
+    private BorderPane seasonModule;
+
     @FXML
     private void initialize() {
+
+        { // is api null
+            boolean isNull = (api == null) ? true : false;
+            logger.debug(this, "Is api null (in mfController - before): " + isNull);
+        }
+
+        // if (api == null)
+        // connectAPI();
+
+        IncrementalSearch searchEngine = api.getSearchEngine();
+
+        // { // is api null
+        // boolean isNull = (api == null) ? true : false;
+        // logger.debug(this, "Is api null (in mfController - after): " + isNull);
+        // }
 
         search_field.setOnKeyPressed(event -> {
             // Get current text BEFORE processing event
             String currentText = search_field.getText();
-
-            IncrementalSearch searchEngine = api.getSearchEngine();
 
             if (event.getCode() == KeyCode.ENTER) {
                 // System.out.println("\n\nActual Text: '" + currentText + "'");
@@ -125,8 +128,13 @@ public class MainFrameController {
         });
     }
 
-    public void connectAPI(API api) {
-        this.api = api;
+    public void connectAPI() {
+        this.api = APIFactory.getApi();
+
+        { // is api null
+            boolean isNull = (api == null) ? true : false;
+            logger.debug(this, "Is api null (in mfController - at connection): " + isNull);
+        }
     }
 
     public void setModules(ArrayList<Entertainment> list) {
@@ -157,7 +165,7 @@ public class MainFrameController {
 
             module.getProperties().put("controller", mController);
 
-            mController.setApi(api);
+            mController.setApi();
             mController.setId(id);
             mController.setEntertainment(entertainment);
 
@@ -222,13 +230,13 @@ public class MainFrameController {
             movieViewer = fxmlLoader.load();
             mvController = fxmlLoader.getController();
             movieViewer.getProperties().put("controller", mvController);
-            mvController.setApi(api);
+            mvController.setApi();
 
             fxmlLoader = new FXMLLoader(getClass().getResource("../../../res/fxml/AnimeViewer.fxml"));
             animeViewer = fxmlLoader.load();
             avController = fxmlLoader.getController();
             animeViewer.getProperties().put("controller", avController);
-            avController.setApi(api);
+            avController.setApi();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -289,8 +297,7 @@ public class MainFrameController {
      */
     public void search() {
 
-        // remove all modules in list_search
-        list_search.getItems().clear();
+        list_search.getItems().clear(); // remove all modules in list_search
 
         // the modules that will be removed from this list
         duplicateSearchList = new ArrayList<>(ogSearchModules);
@@ -298,8 +305,7 @@ public class MainFrameController {
         // this list contains modules to be removed
         ArrayList<BorderPane> removedModules = new ArrayList<>();
 
-        // the id from the search results
-        int moduleIdArray = 0;
+        int moduleIdArray = 0; // the id from the search results
 
         // going through the list of search modules
         for (BorderPane borderPane : duplicateSearchList) {
@@ -307,8 +313,7 @@ public class MainFrameController {
             // module controller of the module
             ModuleController mController = (ModuleController) (borderPane.getProperties().get("controller"));
 
-            // id of module
-            int moduleID = mController.getId();
+            int moduleID = mController.getId(); // id of module
 
             // id from search array
             int searchID = 0;
@@ -372,6 +377,10 @@ public class MainFrameController {
         return list_search;
     }
 
+    public ObservableList<BorderPane> getCompletedListModules() {
+        return list_completed.getItems();
+    }
+
     public ArrayList<BorderPane> getSearchArrayList() {
         return ogSearchModules;
     }
@@ -399,4 +408,108 @@ public class MainFrameController {
         return null;
     }
 
+    public void resetList() {
+        ArrayList<BorderPane> tempList;
+        // switch (list_) {
+        // case 1:
+        tempList = new ArrayList<>(list_completed.getItems());
+
+        for (BorderPane module : tempList) {
+            ModuleController mController = (ModuleController) module.getProperties().get("controller");
+            mController.refresh();
+        }
+
+        list_completed.getItems().clear();
+        list_completed.getItems().addAll(tempList);
+        // break;
+
+        // case 2:
+        tempList = new ArrayList<>(list_released.getItems());
+
+        for (BorderPane module : tempList) {
+            ModuleController mController = (ModuleController) module.getProperties().get("controller");
+            mController.refresh();
+        }
+
+        list_released.getItems().clear();
+        list_released.getItems().addAll(tempList);
+        // break;
+
+        // case 3:
+        tempList = new ArrayList<>(list_upcoming.getItems());
+
+        for (BorderPane module : tempList) {
+            ModuleController mController = (ModuleController) module.getProperties().get("controller");
+            mController.refresh();
+        }
+
+        list_upcoming.getItems().clear();
+        list_upcoming.getItems().addAll(tempList);
+        // break;
+
+        // default:
+        tempList = null;
+        logger.log(this, "Primary status does not exist");
+        // }
+
+        tempList = new ArrayList<>(ogSearchModules);
+
+        for (BorderPane module : tempList) {
+            ModuleController mController = (ModuleController) module.getProperties().get("controller");
+            mController.refresh();
+        }
+
+        list_search.getItems().clear();
+        list_search.getItems().addAll(tempList);
+
+        list_completed.refresh();
+        list_released.refresh();
+        list_upcoming.refresh();
+        list_search.refresh();
+    }
+
+    @FXML
+    public void addSeasonModule() {
+
+        try {
+            FXMLLoader seasonModuleLoader = new FXMLLoader(
+                    getClass().getResource("../../../res/fxml/SeasonModule_v2.fxml"));
+
+            seasonModule = seasonModuleLoader.load();
+            smController = seasonModuleLoader.getController();
+
+            seasonModule.getProperties().put("controller", smController);
+            smController.setApi();
+            smController.testData();
+
+            ogSearchModules.add(seasonModule);
+
+            list_search.getItems().clear();
+            list_search.getItems().addAll(new ArrayList<>(ogSearchModules));
+
+            logger.debug(this, "Season Module Added");
+            list_search.refresh();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void removeSeasonModule() {
+
+        ogSearchModules.remove(seasonModule);
+
+        list_search.getItems().clear();
+        list_search.getItems().addAll(new ArrayList<>(ogSearchModules));
+
+        logger.debug(this, "Season Module Removed");
+        list_search.refresh();
+
+    }
+
+    @FXML
+    public void add_entertainment() {
+        api.addEntertainment();
+    }
 }

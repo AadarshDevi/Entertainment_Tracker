@@ -46,7 +46,7 @@ public class IncrementalSearch {
             if (string.toLowerCase().contains(phrase.toLowerCase())) {
                 searchIndexes.add(i);
                 // System.out.println("Index: " + i + " :: String: " + string.substring(9, 25));
-                logger.log(this, "Index: " + i + " :: String: " + string.substring(9, 25));
+                // logger.log(this, "Index: " + i + " :: String: " + string.substring(9, 25));
             }
             i++;
         }

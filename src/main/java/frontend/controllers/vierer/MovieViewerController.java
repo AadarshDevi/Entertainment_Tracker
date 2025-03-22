@@ -1,4 +1,4 @@
-package main.java.frontend.controllers;
+package main.java.frontend.controllers.vierer;
 
 import java.io.IOException;
 
@@ -10,45 +10,30 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.VBox;
-import main.java.api.API;
+import main.java.api.apiloader.API;
+import main.java.api.apiloader.APIFactory;
 import main.java.backend.entertainment.Movie;
+import main.java.frontend.controllers.CenterLabelController;
+import main.java.frontend.controllers.ParentController;
 
-public class MovieViewerController {
+public class MovieViewerController extends ParentController {
 
     private API api;
 
-    @FXML
-    private ListView<Label> movie_tags;
+    @FXML private ListView<Label> movie_tags;
+    @FXML private ListView<Label> movie_production_companies;
 
-    @FXML
-    private ListView<Label> movie_production_companies;
+    @FXML private Button entertainment_button_edit;
+    @FXML private Button entertainment_button_copy;
 
-    @FXML
-    private Button entertainment_button_edit;
+    @FXML private Label entertainment_franchise;
+    @FXML private Label entertainment_title;
+    @FXML private Label entertainment_primary_status;
+    @FXML private Label entertainment_secondary_status;
+    @FXML private Label entertainment_release_date;
+    @FXML private Label entertainment_duration;
 
-    @FXML
-    private Button entertainment_button_copy;
-
-    @FXML
-    private Label entertainment_franchise;
-
-    @FXML
-    private Label entertainment_title;
-
-    @FXML
-    private Label entertainment_primary_status;
-
-    @FXML
-    private Label entertainment_secondary_status;
-
-    @FXML
-    private Label entertainment_release_date;
-
-    @FXML
-    private Label entertainment_duration;
-
-    @FXML
-    private VBox root_pane;
+    @FXML private VBox root_pane;
 
     private Movie movie;
 
@@ -205,8 +190,8 @@ public class MovieViewerController {
         clipboard.setContent(content);
     }
 
-    public void setApi(API api) {
-        this.api = api;
+    public void setApi() {
+        this.api = APIFactory.getApi();
     }
 
     public void setSize(double width, double height) {

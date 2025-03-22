@@ -1,6 +1,7 @@
 package main.java.frontend.controllers;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -13,96 +14,105 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import main.java.api.API;
 import main.java.api.Logger.ConsoleLog;
 import main.java.api.Logger.ConsoleLogFactory;
+import main.java.api.apiloader.API;
+import main.java.api.apiloader.APIFactory;
 import main.java.backend.entertainment.Anime;
 import main.java.backend.entertainment.Entertainment;
 import main.java.backend.entertainment.Movie;
 
-public class EditorController {
+public class EditorController extends ParentController {
 
-    @FXML
-    private TextField module_id;
-    @FXML
-    private TextField entertainment_type;
-    @FXML
-    private TextField entertainment_franchise;
-    @FXML
-    private TextField entertainment_title;
-    @FXML
-    private TextField entertainment_release_date;
-    @FXML
-    private TextField entertainment_duration;
-    @FXML
-    private TextField entertainment_season_number;
-    @FXML
-    private TextField entertainment_episode_number;
-    @FXML
-    private CheckBox entertainment_status_1;
-    @FXML
-    private CheckBox entertainment_status_2;
-    @FXML
-    private CheckBox entertainment_status_3;
-    @FXML
-    private CheckBox entertainment_status_4;
-    @FXML
-    private CheckBox entertainment_status_5;
+    @FXML private TextField module_id;
+    @FXML private TextField entertainment_type;
+    @FXML private TextField entertainment_franchise;
+    @FXML private TextField entertainment_title;
+    @FXML private TextField entertainment_release_date;
+    @FXML private TextField entertainment_duration;
+    @FXML private TextField entertainment_season_number;
+    @FXML private TextField entertainment_episode_number;
+    @FXML private CheckBox entertainment_status_1;
+    @FXML private CheckBox entertainment_status_2;
+    @FXML private CheckBox entertainment_status_3;
+    @FXML private CheckBox entertainment_status_4;
+    @FXML private CheckBox entertainment_status_5;
 
-    @FXML
-    private Button change_entertainment;
-    @FXML
-    private Button next_entertainment;
-    @FXML
-    private Button previous_entertainment;
+    @FXML private Button change_entertainment;
+    @FXML private Button next_entertainment;
+    @FXML private Button previous_entertainment;
 
-    @FXML
-    private TextArea entertainment_production_companies;
-    @FXML
-    private TextArea entertainment_tags;
+    @FXML private TextArea entertainment_production_companies;
+    @FXML private TextArea entertainment_tags;
 
-    @FXML
-    private HBox entertainment_season_hbox_module;
-    @FXML
-    private HBox entertainment_episode_hbox_module;
+    @FXML private HBox entertainment_season_hbox_module;
+    @FXML private HBox entertainment_episode_hbox_module;
+
+    @FXML private Button to_first_button;
+    @FXML private Button previous_button;
+    @FXML private Button search_button;
+    @FXML private Button next_button;
+    @FXML private Button to_last_button;
+
+    @FXML private Button save_button;
+    @FXML private Button add_button;
+    @FXML private Button close_button;
 
     private ArrayList<Entertainment> entertainmentList;
 
     private API api;
     private ConsoleLog logger;
 
-    @FXML
-    private Button to_first_button;
-    @FXML
-    private Button previous_button;
-    @FXML
-    private Button search_button;
-    @FXML
-    private Button next_button;
-    @FXML
-    private Button to_last_button;
-
-    @FXML
-    private Button save_button;
-    @FXML
-    private Button add_button;
-    @FXML
-    private Button close_button;
-
     private Entertainment entertainment;
 
     private int searchID;
 
+    @SuppressWarnings("unused") private boolean inputError = false;
+
+    private boolean isSaved = true;
+    private boolean isCreator = false;
+
     @SuppressWarnings("unused")
     public void initialize() {
+
+        entertainment_type.setDisable(true);
+
         entertainment_franchise.textProperty().addListener((o, ov, nv) -> {
             save_button.setStyle("");
+            isSaved = false;
         });
+
+        entertainment_title.textProperty().addListener((o, ov, nv) -> {
+            save_button.setStyle("");
+            isSaved = false;
+        });
+
+        entertainment_release_date.textProperty().addListener((o, ov, nv) -> {
+            save_button.setStyle("");
+            isSaved = false;
+        });
+
+        entertainment_duration.textProperty().addListener((o, ov, nv) -> {
+            save_button.setStyle("");
+            isSaved = false;
+        });
+
+        entertainment_tags.textProperty().addListener((o, ov, nv) -> {
+            save_button.setStyle("");
+            isSaved = false;
+        });
+
+        entertainment_production_companies.textProperty().addListener((o, ov, nv) -> {
+            save_button.setStyle("");
+            isSaved = false;
+        });
+
+        // TODO: check for the check boxes for the save
     }
 
-    public void setApi(API api) {
+    public void setApi() {
 
-        this.api = api;
+        this.api = APIFactory.getApi();
         logger = ConsoleLogFactory.getLogger();
     }
 
@@ -315,7 +325,7 @@ public class EditorController {
 
         // duration and release date
         entertainment_duration.setText(movie.getDuration() + "");
-        entertainment_release_date.setText(movie.getDate() + "");
+        entertainment_release_date.setText(api.convert_LocalDate_to_string_date(movie.getDate()));
 
     }
 
@@ -415,14 +425,25 @@ public class EditorController {
 
                 if (!movie.getType().equals(Entertainment.MOVIE))
                     movie.setType(Entertainment.MOVIE);
-                if (!movie.getFranchise().equals(entertainment_franchise.getText())) {
+
+                if (!movie.getFranchise().equals(entertainment_franchise.getText()))
                     movie.setFranchise(entertainment_franchise.getText());
-                    logger.log(this, "Saving: " + movie.getFranchise());
-                }
+
                 if (!movie.getTitle().equals(entertainment_title.getText()))
                     movie.setFranchise(entertainment_title.getText());
-                // TODO: DO Date
-                // if(!movie.getDate().equals(Entertainment.MOVIE)) movie.;
+
+                try {
+                    if (!movie.getDate()
+                            .equals(api.convert_string_date_to_LocalDate(entertainment_release_date.getText())))
+                        movie.setDate(api.convert_string_date_to_LocalDate(entertainment_release_date.getText()));
+
+                } catch (DateTimeParseException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "The date format is wrong. Please input the date in\nthe form: MMM dd, yyyy\nEx: Jul 23, 2000",
+                            "Date Format",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+
                 if (movie.getDuration() != Integer.parseInt(entertainment_duration.getText()))
                     movie.setDuration(Integer.parseInt(entertainment_duration.getText()));
 
@@ -439,6 +460,7 @@ public class EditorController {
         api.sendRefreshModule(searchID);
 
         // change color of save button to green
+        isSaved = true;
         save_button.setStyle("-fx-background-color:rgb(0, 139, 0); -fx-text-fill: white;");
 
         logger.log(this, "Information saved");
@@ -447,11 +469,33 @@ public class EditorController {
 
     @FXML
     private void closeEditor() {
-        saveCurrentEntertainment();
-        api.closeEditor();
+        if (isSaved) {
+            api.closeEditor();
+        } else if (isCreator) {
+            JOptionPane.showMessageDialog(null,
+                    "Entertainment Creator",
+                    "Lose Input",
+                    JOptionPane.OK_CANCEL_OPTION);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Please click the Save Button",
+                    "Input Problem",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public int getSearchID() {
         return searchID;
     }
+
+    public void createEntertainment() {
+        isSaved = false;
+        isCreator = true;
+        disbaleSlider();
+
+        save_button.setDisable(true);
+        entertainment_type.setDisable(false);
+        module_id.setText(entertainmentList.size() + "");
+    }
+
 }

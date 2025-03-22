@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.frontend.controllers.ClientController">
+   <children>
+      <HBox layoutX="-38.0" layoutY="-7.0" prefHeight="400.0" prefWidth="628.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="370.0" prefWidth="253.0" spacing="5.0">
+               <children>
+                  <Label fx:id="client_label_logo" alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="329.0" prefWidth="199.0" spacing="5.0">
+               <children>
+                  <Button fx:id="client_button_movie_tracker" mnemonicParsing="false" prefHeight="140.0" prefWidth="140.0" style="-fx-background-radius: 25;" />
+                  <Label alignment="CENTER" prefHeight="65.0" prefWidth="200.0" text="Movie Tracker">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <Button fx:id="client_button_tv_tracker" mnemonicParsing="false" prefHeight="140.0" prefWidth="140.0" style="-fx-background-radius: 25;" />
+                  <Label alignment="CENTER" prefHeight="65.0" prefWidth="200.0" text="TV Show Tracker">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
