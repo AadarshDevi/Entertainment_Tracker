@@ -1,3 +1,7 @@
+# Project Abandoned
+
+This build of the entertainment tracker is broken so a new build is being built. link to entertainment tracker build 2: https://github.com/AadarshDevi/ET_Build_2
+
 ## Entertainment Tracker
 
 - Dev Version: 3.1.A.1.1.6
