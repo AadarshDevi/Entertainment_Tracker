@@ -38,7 +38,8 @@ public class Backend {
         try {
 
             // create filereader that reads from data.txt
-            BufferedReader fileReader = new BufferedReader(new FileReader(new File("src/main/res/data.txt")));
+            BufferedReader fileReader = new BufferedReader(
+                    new FileReader(new File("D:/Projects/Entertainment_Tracker/data/data.txt")));
             // BufferedReader fileReader = new BufferedReader(new FileReader(new
             // File("src/main/res/data_2.txt")));
             String line;

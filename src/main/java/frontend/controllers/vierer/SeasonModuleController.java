@@ -150,7 +150,11 @@ public class SeasonModuleController extends ParentController {
             for (String[] strings : test_data) {
 
                 // create module
-                FXMLLoader moduleLoader = new FXMLLoader(getClass().getResource("../../../res/fxml/Module.fxml"));
+                FXMLLoader moduleLoader = new FXMLLoader(
+                        getClass().getResource("../../../../res/fxml/viewer/Module.fxml"));
+
+                System.out.println("Location: " + moduleLoader.getLocation());
+
                 BorderPane module = moduleLoader.load();
                 ModuleController mController = (ModuleController) moduleLoader.getController();
 

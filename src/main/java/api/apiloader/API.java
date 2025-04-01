@@ -50,13 +50,15 @@ public class API {
     // creates the backend and search engine
     public void createBackend() {
         backend = new Backend(this);
-        engine = new IncrementalSearch(50);
+        engine = new IncrementalSearch(backend.getRawData());
+        // engine.
+        System.out.println("Search Engine (check 0):" + engine);
     }
 
     // starts the backend processes
     public void setBackend() {
         backend.start(); // backend setup
-        engine.setOriginalList(backend.getRawData()); // SearchEngine setup
+        // engine.setOriginalList(backend.getRawData()); // SearchEngine setup
     }
 
     public void setFrontend() {
@@ -205,6 +207,7 @@ public class API {
             boolean isNull = (this == null) ? true : false;
             logger.debug(this, "Is api null (in api): " + isNull);
         }
+        System.out.println("Search Engine (check 3):" + engine);
         return engine;
     }
 

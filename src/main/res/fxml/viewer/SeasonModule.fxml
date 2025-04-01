@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="module_container" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.frontend.controllers.SeasonModuleController">
+<BorderPane fx:id="module_container" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.frontend.controllers.vierer.SeasonModuleController">
    <center>
       <VBox prefHeight="167.0" prefWidth="846.0" style="-fx-background-radius: 15;">
          <children>

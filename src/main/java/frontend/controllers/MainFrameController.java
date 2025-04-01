@@ -85,6 +85,8 @@ public class MainFrameController extends ParentController {
     private SeasonModuleController smController;
     private BorderPane seasonModule;
 
+    private IncrementalSearch searchEngine;
+
     @FXML
     private void initialize() {
 
@@ -94,9 +96,9 @@ public class MainFrameController extends ParentController {
         }
 
         // if (api == null)
-        // connectAPI();
+        connectAPI();
 
-        IncrementalSearch searchEngine = api.getSearchEngine();
+        System.out.println("Search Engine (check 1):" + searchEngine);
 
         // { // is api null
         // boolean isNull = (api == null) ? true : false;
@@ -121,6 +123,7 @@ public class MainFrameController extends ParentController {
 
             } else if (currentText.isEmpty()) {
                 System.out.println("\n\n>>> Resetting Search Engine");
+                System.out.println("Search Engine(check 2):" + searchEngine);
                 searchEngine.resetEngine();
                 logger.log(this, "Current Search List: " +
                         searchEngine.getCurrentSearchList().size());
@@ -159,7 +162,7 @@ public class MainFrameController extends ParentController {
         try {
 
             // create module
-            FXMLLoader moduleLoader = new FXMLLoader(getClass().getResource("../../../res/fxml/Module.fxml"));
+            FXMLLoader moduleLoader = new FXMLLoader(getClass().getResource("../../../res/fxml/viewer/Module.fxml"));
             BorderPane module = moduleLoader.load();
             ModuleController mController = (ModuleController) moduleLoader.getController();
 
@@ -226,13 +229,13 @@ public class MainFrameController extends ParentController {
     public void setFxmlsAndControllers() {
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../../res/fxml/MovieViewer.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../../res/fxml/viewer/MovieViewer.fxml"));
             movieViewer = fxmlLoader.load();
             mvController = fxmlLoader.getController();
             movieViewer.getProperties().put("controller", mvController);
             mvController.setApi();
 
-            fxmlLoader = new FXMLLoader(getClass().getResource("../../../res/fxml/AnimeViewer.fxml"));
+            fxmlLoader = new FXMLLoader(getClass().getResource("../../../res/fxml/viewer/AnimeViewer.fxml"));
             animeViewer = fxmlLoader.load();
             avController = fxmlLoader.getController();
             animeViewer.getProperties().put("controller", avController);
@@ -473,7 +476,7 @@ public class MainFrameController extends ParentController {
 
         try {
             FXMLLoader seasonModuleLoader = new FXMLLoader(
-                    getClass().getResource("../../../res/fxml/SeasonModule_v2.fxml"));
+                    getClass().getResource("../../../res/fxml/viewer/SeasonModule_v2.fxml"));
 
             seasonModule = seasonModuleLoader.load();
             smController = seasonModuleLoader.getController();
@@ -511,5 +514,9 @@ public class MainFrameController extends ParentController {
     @FXML
     public void add_entertainment() {
         api.addEntertainment();
+    }
+
+    public void setSearchEngine(IncrementalSearch engine) {
+        this.searchEngine = api.getSearchEngine();
     }
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane fx:id="module_container" maxHeight="380.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="846.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.frontend.controllers.SeasonModuleController">
+<BorderPane fx:id="module_container" maxHeight="380.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="846.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.frontend.controllers.vierer.SeasonModuleController">
    <top>
       <BorderPane fx:id="module_info" maxHeight="34.0" maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>

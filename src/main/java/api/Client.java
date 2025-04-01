@@ -8,8 +8,6 @@ import javafx.stage.Stage;
 import main.java.api.Logger.ConsoleLog;
 import main.java.api.apiloader.API;
 import main.java.api.apiloader.APIFactory;
-import main.java.backend.fxmlLoader.FXMLManager;
-import main.java.backend.fxmlLoader.FXMLManagerFactory;
 import main.java.frontend.controllers.MainFrameController;
 
 public class Client extends Application {
@@ -54,6 +52,7 @@ public class Client extends Application {
         // api creates backend, logger and search engine
         api.createBackend();
         api.setBackend();
+        mfController.setSearchEngine(api.getSearchEngine());
         api.setFrontend(); // sets the frontend
 
         logger.log(this, "Backend and Frontend are Ready");
